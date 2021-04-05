@@ -1,5 +1,7 @@
 import React, { Component, useEffect, useState }  from 'react';
 import axios from 'axios';
+import CardView from '../Cardview/CardView'
+import classes from'./Dashboard.css'
 
 
 const Dashboard =(props)=>{
@@ -64,12 +66,25 @@ const Dashboard =(props)=>{
             
 
     }, [username, location]);
+
+
+    const CardViews = locationBasedResults.map(CardViewRes=>{
+        return <CardView  key = {CardViewRes.id}
+                          resName = {CardViewRes.name}
+                          resImg ={CardViewRes.image_url}
+                          price = {CardViewRes.price}
+                          rating={CardViewRes.rating}/>
+    });
     
     return(
+    
     <div>
         <h1>Dashboard page </h1>
         <h2> Welcome {username},{location}</h2>
         <button type="submit" onClick={props.deleteToken} > Logout </button>
+        <section className={classes.Posts}>
+            {CardViews}
+        </section>
 
     </div>)
 }
