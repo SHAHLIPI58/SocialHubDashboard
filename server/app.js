@@ -1,3 +1,4 @@
+const axios = require("axios")
 var moment = require("moment");
 var express = require('express');
 var app = express();
@@ -27,9 +28,10 @@ app.use('/login', (req, res) => {
         res.status(404).json({err:"404 error"});
         //res.status(401).send("Unauthorized");  
       }else if (JSON.stringify(results).length > 2){
-          console.log("result password" +JSON.stringify(results))
+          console.log("result password" +results[0].location)
           res.send({
-            token: 'test123'
+            token: 'test123',
+            location: results[0].location
           }); 
       }else{
         res.status(401).send("Unauthorized");
@@ -80,6 +82,31 @@ app.use('/signup', (req, res) => {
                     
                   });
   //res.status(401).send("Unauthorized..");
+})
+
+// Different API Calls Here
+app.post('/search',(req,res)=>{
+  var location = req.body.location;
+  const bearerToken = "eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
+  const config = {
+    headers: {
+        Authorization: `Bearer ${bearerToken}` 
+    },
+    params: {location: location}
+  };
+
+  axios.get( 
+    'https://api.yelp.com/v3/businesses/search',
+    config
+  ).then(response => {
+      console.log("api call returned: ", response.data);
+      res.send(response.data);
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).send(error);
+  });
+
 })
 
   app.get('/buy', (req, res) => {

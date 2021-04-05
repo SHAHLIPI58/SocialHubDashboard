@@ -36,6 +36,7 @@ const Login =(props)=> {
         if(token){
             props.saveToken(token);
             sessionStorage.setItem('username', username);
+            sessionStorage.setItem('location', token.location);
         }
         // window.location.replace("http://localhost:3000/dashboard");
     }
