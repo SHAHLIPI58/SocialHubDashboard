@@ -5,6 +5,7 @@ import classes from'./Dashboard.css'
 import Header from '../Header/Header'
 import SideNav from '../SideNav/SideNav'
 import MoonLoader from "react-spinners/MoonLoader";
+import NoResultFound from '../NoResultFound/NoResultFound';
 
 
 
@@ -125,7 +126,7 @@ const Dashboard =(props)=>{
             {
                 CardViews.length > 0? CardViews:
                 (noResult? 
-                        <div>No result</div> : <MoonLoader color='blue' loading={true} size={60} />
+                        <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
                 )
             
             
