@@ -5,9 +5,15 @@ import Marker from './Marker';
 const AnyReactComponent = ({text}) => <div>{text}</div>;
 
 const GoogleMap = (props) => {
+    
     const [center, setCenter] = useState({lat: 33.1976, lng: -96.6153 });
     const [zoom, setZoom] = useState(9);
-
+//    const longlat = props.longlat
+//     console.log("from google map", longlat)
+//     longlat.map(ll=>{
+//         console.log(parseFloat(ll.longitude))
+//         console.log(parseFloat(ll.latitude))
+//     })
     const getMapOptions = (maps) => {
         return {
           disableDefaultUI: true,
@@ -17,6 +23,17 @@ const GoogleMap = (props) => {
         };
       };
 
+    const markers = props.longlat.map((ll,index) =>{
+        return <Marker 
+                key ={index}
+                lat = {Number(ll.latitude)}
+                lng={Number(ll.longitude)} 
+                name ="My lipi marker"
+                color="green"/>
+        
+    })
+
+
     return (
         <div style={{ height: '70vh', width: '90%' }}>
         <GoogleMapReact
@@ -25,18 +42,17 @@ const GoogleMap = (props) => {
           defaultZoom={zoom}
           options={getMapOptions}
         >
-          <Marker
-            lat={33.07652}
-            lng={-96.82177}
-            name="My Marker"
-            color="blue"
-          />
-          <Marker
-             lat={32.838272}
-             lng={-96.775412}
-            name="My Marker"
-            color="red"
-          />
+
+             <Marker 
+               
+                lat = {33.1976}
+                lng={-96.6153} 
+                name ="My lipi marker"
+                color="red"/>
+          
+          {markers}
+         
+
         </GoogleMapReact>
       </div>
     );

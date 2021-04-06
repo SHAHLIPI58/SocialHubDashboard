@@ -24,6 +24,12 @@ const Dashboard =(props)=>{
     });
 
     const [noResult, setNoResult] = useState(false);
+    const longlat = [{latitude:33.168936, longitude:-96.663925 },
+                     {latitude:33.04213,longitude:-96.75218}]
+    const[latlogproperties,setLatlogproperties]= useState([])
+
+
+    
     // async function locationBasedSearch(location) {
     //     console.log("calling search api with location: ", location);
     //     return fetch('http://localhost:3001/search', {
@@ -54,16 +60,44 @@ const Dashboard =(props)=>{
           ).then(response => {
               console.log("api call returned: ", response.data);
               filterLocationBasedSearch(response.data);
+              
           })
           .catch(console.log);
         
     }
+
+    // let carsProperties = cars.map(car => {
+    //     let properties = {
+    //       "capacity": car.capacity,
+    //       "size": "large"
+    //     };
+    //     if (car.capacity <= 5){
+    //       properties['size'] = "medium";
+    //     }
+    //     if (car.capacity <= 3){
+    //       properties['size'] = "small";
+    //     }
+    //     return properties;
+    //    });
+    //    console.log(carsProperties);
 
     const filterLocationBasedSearch = (locationResults) => {
         const businesses = locationResults.businesses;
         setLocationBasedResults(businesses);
         if(businesses.length === 0){
             setNoResult(true);
+        }else{
+            console.log("businesses: ", businesses);
+            
+            let latlogproperties = businesses.map((business,index) =>{
+                        let properties = {
+                            "longitude":  business.coordinates.longitude,
+                            "latitude": business.coordinates.latitude
+                            };
+                return properties
+            }) 
+            console.log(latlogproperties)
+            setLatlogproperties(latlogproperties)
         }
         // console.log("businesses: ", businesses);
         // businesses.map(business =>{
@@ -125,14 +159,18 @@ const Dashboard =(props)=>{
         <Header deleteToken={props.deleteToken} username={username}/>
         <section className={classes.Posts}>
             {
-                CardViews.length > 0? CardViews:
+                CardViews.length > 0? CardViews :
                 (noResult? 
                         <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
                 )
             
+            }
+
+            {
+                CardViews.length > 0? <GoogleMap longlat={latlogproperties} />: null
             
             }
-        <GoogleMap />
+       
         </section>
         
 
