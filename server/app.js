@@ -31,7 +31,9 @@ app.use('/login', (req, res) => {
           console.log("result password" +results[0].location)
           res.send({
             token: 'test123',
-            location: results[0].location
+            location: results[0].location,
+            latitude: results[0].latitude,
+            longitude: results[0].longitude
           }); 
       }else{
         res.status(401).send("Unauthorized");
@@ -56,6 +58,9 @@ app.use('/signup', (req, res) => {
   var uname = req.body.username
   var psw = req.body.password
   var lct = req.body.location
+  var long = req.body.longitude;
+  var lat = req.body.latitude;
+  console.log("longitude = ",long,"latitude =",lat)
   connection.query('SELECT * FROM `user` WHERE `username` = ?',[uname],
                   function(err, results, fields) {
 
@@ -68,7 +73,7 @@ app.use('/signup', (req, res) => {
 
                     }else{
                       //insert query
-                      var post = {username : uname, password : psw,location:lct };
+                      var post = {username : uname, password : psw,location:lct,longitude:long,latitude:lat };
                       var q = connection.query('insert into `user` set ?', post, function (error, results, fields) {
                         if(error) throw error;
                       })
@@ -87,12 +92,25 @@ app.use('/signup', (req, res) => {
 // Different API Calls Here
 app.post('/search',(req,res)=>{
   var location = req.body.location;
+  var categories = req.body.categories;
+  var radius =  req.body.radius;
+  var price = req.body.price;
+
+  console.log(radius);
+  console.log(categories);
+  console.log(price);
+
   const bearerToken = "eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {
         Authorization: `Bearer ${bearerToken}` 
     },
-    params: {location: location}
+    params: {location: location,
+             limit:20,
+             categories: categories,
+             radius: radius,
+             price: price
+            }
   };
 
   axios.get( 

@@ -1,0 +1,14 @@
+.fixedheader, .fixedfooter{
+    width: 100%;
+    position: fixed;        
+    background: #333;
+    padding: 0px 0;
+    color: #fff;
+}
+.fixedheader{
+    top: 0;
+    left: 0;
+}
+.fixedfooter{
+    bottom: 0;
+}

@@ -37,6 +37,8 @@ const Login =(props)=> {
             props.saveToken(token);
             sessionStorage.setItem('username', username);
             sessionStorage.setItem('location', token.location);
+            sessionStorage.setItem('longitude', token.longitude);
+            sessionStorage.setItem('latitude', token.latitude);
         }
         // window.location.replace("http://localhost:3000/dashboard");
     }
@@ -70,8 +72,8 @@ const Login =(props)=> {
     )
 }
 
-Login.propTypes = {
-    setToken: PropTypes.func.isRequired
-  }
+// Login.propTypes = {
+//     setToken: PropTypes.func.isRequired
+//   }
 
 export default Login;

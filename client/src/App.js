@@ -57,7 +57,7 @@ const App = (props)=> {
 
     return (
       <div className={classes.wrapper}>
-        <h1>react app demo boxes</h1>
+        {/* <h1>react app demo boxes</h1> */}
          {/* <Box value="10">box1</Box>
          <Box value="20">box1</Box>
          <Box value="30">box1</Box> */}

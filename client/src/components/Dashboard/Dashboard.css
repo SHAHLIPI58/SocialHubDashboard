@@ -3,7 +3,12 @@
     flex-flow: row wrap;
     justify-content: center;
     width: 80%;
+    height: 350px;
     margin: auto;
+    float: right;
+    overflow-y: scroll;
+    margin-top: 50px;
+
 }
 
 .Posts ul{
@@ -14,5 +19,5 @@
 }
 
 .Posts li{
-    display: ;
+    display:none ;
 }

@@ -1,5 +1,5 @@
 .CardView {
-    width: 350px;
+    width: 300px;
     padding: 16px;
     text-align: center;
     border: 1px solid #eee;
@@ -7,6 +7,7 @@
     margin: 10px;
     box-sizing: border-box;
     cursor: pointer;
+   
 }
 
 .CardView:hover,

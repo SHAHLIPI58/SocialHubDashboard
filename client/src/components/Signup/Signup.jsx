@@ -10,6 +10,8 @@ const Signup =(props)=> {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [location, setLocation] = useState("");
+    const[longitude,setLongitude] = useState("");
+    const[latitude,setLatitude] = useState("");
     const [error, setError] = useState(false);
     const[message,setMessage] = useState("");
 
@@ -73,7 +75,9 @@ const Signup =(props)=> {
         const token = await signupUser({
           username,
           password,
-          location
+          location,
+          longitude,
+          latitude
         });
         // if(token){
         //     props.saveToken(token);
@@ -92,6 +96,8 @@ const Signup =(props)=> {
       .then(res => {
 
         setLocation(`${res.data.city},${res.data.postal}`)
+        setLongitude(res.data.longitude)
+        setLatitude(res.data.latitude)
         document.getElementById('locationInput').value = `${res.data.city},${res.data.postal}`;
       })
     }, []);
