@@ -47,7 +47,8 @@
     "webpack-dev-server": "2.11.3",
     "webpack-manifest-plugin": "1.3.2",
     "whatwg-fetch": "2.0.3",
-    "react-spinners": "*"
+    "react-spinners": "*",
+    "google-map-react": "*"
   },
   "scripts": {
     "start": "node scripts/start.js",

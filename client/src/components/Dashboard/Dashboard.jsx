@@ -6,6 +6,7 @@ import Header from '../Header/Header'
 import SideNav from '../SideNav/SideNav'
 import MoonLoader from "react-spinners/MoonLoader";
 import NoResultFound from '../NoResultFound/NoResultFound';
+import GoogleMap from '../GoogleMap/GoogleMap';
 
 
 
@@ -131,6 +132,7 @@ const Dashboard =(props)=>{
             
             
             }
+        <GoogleMap />
         </section>
         
 
