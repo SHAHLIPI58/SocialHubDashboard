@@ -4,6 +4,7 @@ import CardView from '../Cardview/CardView'
 import classes from'./Dashboard.css'
 import Header from '../Header/Header'
 import SideNav from '../SideNav/SideNav'
+import MoonLoader from "react-spinners/MoonLoader";
 
 
 
@@ -20,6 +21,7 @@ const Dashboard =(props)=>{
         radius: "40000"
     });
 
+    const [noResult, setNoResult] = useState(false);
     // async function locationBasedSearch(location) {
     //     console.log("calling search api with location: ", location);
     //     return fetch('http://localhost:3001/search', {
@@ -58,6 +60,9 @@ const Dashboard =(props)=>{
     const filterLocationBasedSearch = (locationResults) => {
         const businesses = locationResults.businesses;
         setLocationBasedResults(businesses);
+        if(businesses.length === 0){
+            setNoResult(true);
+        }
         // console.log("businesses: ", businesses);
         // businesses.map(business =>{
         //     console.log(business.name);
@@ -89,7 +94,7 @@ const Dashboard =(props)=>{
         }
             
 
-    }, [username, location,longitude,latitude, userPreference]);
+    }, [username, location,longitude,latitude, userPreference, noResult]);
 
 
 
@@ -99,6 +104,7 @@ const Dashboard =(props)=>{
 
 
     // console.log("length of locationBasedResults = ",locationBasedResults.length)
+    console.log("locationBasedResults =",locationBasedResults.length)
     
     const CardViews = locationBasedResults.map(CardViewRes=>{
         return <CardView  key = {CardViewRes.id}
@@ -107,6 +113,8 @@ const Dashboard =(props)=>{
                           price = {CardViewRes.price}
                           rating={CardViewRes.rating}/>
     });
+
+    console.log("cardviews: ", CardViews);
     
     return(
     
@@ -114,7 +122,14 @@ const Dashboard =(props)=>{
         <SideNav userPreference={userPreference} setUserPreference={setUserPreference}/>
         <Header deleteToken={props.deleteToken} username={username}/>
         <section className={classes.Posts}>
-            {CardViews}
+            {
+                CardViews.length > 0? CardViews:
+                (noResult? 
+                        <div>No result</div> : <MoonLoader color='blue' loading={true} size={60} />
+                )
+            
+            
+            }
         </section>
         
 

@@ -47,7 +47,7 @@
     "webpack-dev-server": "2.11.3",
     "webpack-manifest-plugin": "1.3.2",
     "whatwg-fetch": "2.0.3",
-    "@trendmicro/react-sidenav": "*"
+    "react-spinners": "*"
   },
   "scripts": {
     "start": "node scripts/start.js",
