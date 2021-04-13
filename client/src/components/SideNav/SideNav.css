@@ -13,3 +13,37 @@
     flex-direction: column; 
     align-items: center;
 }
+
+.verticalradiobuttons{
+    
+    
+}
+.verticalradiobuttons div {
+    display: block;
+    padding: 0 0 5px 5px;
+    clear: both;
+  }
+  
+  .verticalradiobuttons span {
+    display: block;
+    padding-left: 20px;
+    cursor: inherit;
+  }
+  
+  .verticalradiobuttons label {
+    font-size: rem-calc(16);
+  }
+  
+  .verticalradiobuttons input {
+    
+    float: left;
+    width: 20px;
+    margin-left: -20px;
+    margin-top: 6px; 
+    padding: 0;
+    -webkit-appearance: radio;
+  }
+  .fieldsetProperties{
+    border-color: #232323;
+    border-style: solid;
+  }

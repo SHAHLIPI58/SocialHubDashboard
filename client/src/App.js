@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import  { useEffect } from 'react';
 import classes from './App.css';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import  { useState } from 'react';
@@ -7,6 +8,10 @@ import Dashboard from './components/Dashboard/Dashboard'
 import Preferences from './components/Preferences/Preferences'
 import Login from './components/Login/Login'
 import Signup from './components/Signup/Signup'
+import BarChartComponent from './components/D3Charts/BarChartComponent'
+import BarChart from'./components/D3Charts/BarChart'
+import PieChart from './components/D3Charts/PieChart'
+
 
 // function setToken(userToken) {
 //   sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -22,7 +27,17 @@ import Signup from './components/Signup/Signup'
 //   return userToken.token;
 // }
 
+
+
+
+
+const data = [{ label: 'Apples', value: 10 }, { label: 'Oranges', value: 20 },{ label: 'Pineaaple', value: 20 }];
 const App = (props)=> {
+
+
+ 
+
+  
   
   function getToken() {
     const tokenString = sessionStorage.getItem('token');
@@ -61,7 +76,8 @@ const App = (props)=> {
          {/* <Box value="10">box1</Box>
          <Box value="20">box1</Box>
          <Box value="30">box1</Box> */}
-         
+       
+       
          <BrowserRouter>
             <switch>
               <Route exact path="/">
@@ -81,8 +97,16 @@ const App = (props)=> {
               </Route>
             </switch>
          </BrowserRouter>
+
+         {/* <div style ={{marginTop: '0px'}}>
+          <BarChart id="barchartid"/>
+          </div>
          
-        
+         <BarChartComponent/> */}
+         {/* <PieChart data = {data}
+                  outerRadius={100}
+                  innerRadius = {0}/> */}
+         
       </div>
     );
   

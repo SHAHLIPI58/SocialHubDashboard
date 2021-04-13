@@ -8,6 +8,17 @@ var bodyParser = require('body-parser');
 var mysqlcontroller = require('./Controller/mysqlcontroller');
 var connection = mysqlcontroller
 
+//Mongo Client 
+var mongo = require('mongodb');
+const MongoClient = mongo.MongoClient;
+
+// Connection URL
+const url = 'mongodb://localhost:27017';
+
+// Database Name
+const dbName = 'testingMongo';
+const client = new MongoClient(url);
+
 
 // use it before all route definitions
 app.use(cors({origin: 'http://localhost:3000'}));
@@ -60,6 +71,7 @@ app.use('/signup', (req, res) => {
   var lct = req.body.location
   var long = req.body.longitude;
   var lat = req.body.latitude;
+ 
   console.log("longitude = ",long,"latitude =",lat)
   connection.query('SELECT * FROM `user` WHERE `username` = ?',[uname],
                   function(err, results, fields) {
@@ -127,9 +139,52 @@ app.post('/search',(req,res)=>{
 
 })
 
-  app.get('/buy', (req, res) => {
+app.get('/ratings',(req,res)=>{
+     var name = "aashtha"
+     var fooditem ="panipuri"
+     var rating = 4
+     var category = "food"
+
+      //insert function
+      const insertDocuments = function(db, callback) {
+        // Get the documents collection
+      const collection = db.collection('documents');
+      // Insert one documents or for more documents insertMany() instead of insert()
+      collection.insertOne({ name: name, fooditem : fooditem}, 
+          function(err, result) {
+        console.log('Inserted 44 documents into the collection');
+        callback(result);
+      });
+      };
+
+
+
+      // Use connect method to connect to the server
+      const mongoConnection = client.connect(function(err) {
+
+      console.log('Mongo Connected successfully to server ...');
+
+      const db = client.db(dbName);
+      insertDocuments(db, function() {
+      client.close();
+      })
+
+
+      });
+      res.send("data ratings....")
+});
+
+app.get('/buy', (req, res) => {
     res.send(req.query.val+" 100");
 });
+
+app.get('/bhijai', (req, res) => {
+  res.send("lipi")
+});
+
+
+
+
 
 
 console.log(moment().format());

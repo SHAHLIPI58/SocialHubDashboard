@@ -33,17 +33,20 @@ const SideNav = (props) => {
 
 return (
     <div>
+
+
         <div className={classes.sidenav}>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
+            
+
+             
+  
+
             <form onSubmit={onSubmit}>
                 {/* Radio options for price */}
-                <strong>Price:</strong>
-
-                    <ul>
-                        <li>
+                <strong style={{color:'white'}}>Price:</strong>
+                <div className={classes.verticalradiobuttons}>
+                <fieldset className ={classes.fieldsetProperties}>
+                       <div><span>
                             <label>
                                 <input
                                     type="radio"
@@ -51,17 +54,24 @@ return (
                                     checked={preferences.price === "1"}
                                     onChange={onPriceRadioChange}
                                 />
-                                <span>1</span>
+                                <span style={{color :'white'}}>1</span>
                             </label>
+                            </span></div>
+
+                            <div><span>
                             <label>
+                            
                                 <input
                                     type="radio"
                                     value="2"
                                     checked={preferences.price === "2"}
                                     onChange={onPriceRadioChange}
                                 />
-                                <span>2</span>
+                                <span style={{color :'white'}}>2</span>
                             </label>
+                            </span></div>
+
+                            <div><span>
                             <label>
                                 <input
                                     type="radio"
@@ -69,8 +79,11 @@ return (
                                     checked={preferences.price === "3"}
                                     onChange={onPriceRadioChange}
                                 />
-                                <span>3</span>
+                                <span style={{color :'white'}}>3</span>
                             </label>
+                            </span></div>
+
+                            <div><span>
                             <label>
                                 <input
                                     type="radio"
@@ -78,16 +91,18 @@ return (
                                     checked={preferences.price === "4"}
                                     onChange={onPriceRadioChange}
                                 />
-                                <span>4</span>
+                                <span style={{color :'white'}}>4</span>
                             </label>
-                        </li>
-                    </ul>
+                            </span></div>
+                </fieldset>
+                </div>
 
                 {/* Radio options for categories */}
-                <strong>Categories:</strong>
-
-                    <ul>
-                        <li>
+                <br/>
+                <strong style={{color:'white'}}>Categories:</strong>
+                <div className={classes.verticalradiobuttons}>
+                <fieldset className ={classes.fieldsetProperties}>
+                           <div><span>
                             <label>
                                 <input
                                     type="radio"
@@ -95,8 +110,10 @@ return (
                                     checked={preferences.category === "bars"}
                                     onChange={onCategoryRadioChange}
                                 />
-                                <span>bars</span>
+                                <span style={{color :'white'}}>bars</span>
                             </label>
+                            </span></div>
+                            <div><span>
                             <label>
                                 <input
                                     type="radio"
@@ -104,8 +121,10 @@ return (
                                     checked={preferences.category === "restaurants"}
                                     onChange={onCategoryRadioChange}
                                 />
-                                <span>restaurants</span>
+                                <span style={{color :'white'}}>restaurants</span>
                             </label>
+                            </span></div>
+                            <div><span>
                             <label>
                                 <input
                                     type="radio"
@@ -113,8 +132,10 @@ return (
                                     checked={preferences.category === "parks"}
                                     onChange={onCategoryRadioChange}
                                 />
-                                <span>parks</span>
+                                <span style={{color :'white'}}>parks</span>
                             </label>
+                            </span></div>
+                            <div><span>
                             <label>
                                 <input
                                     type="radio"
@@ -122,8 +143,10 @@ return (
                                     checked={preferences.category === "bowling"}
                                     onChange={onCategoryRadioChange}
                                 />
-                                <span>Bowling</span>
+                                <span style={{color :'white'}}>Bowling</span>
                             </label>
+                            </span></div>
+                            <div><span>
                             <label>
                                 <input
                                     type="radio"
@@ -131,13 +154,15 @@ return (
                                     checked={preferences.category === "movietheaters"}
                                     onChange={onCategoryRadioChange}
                                 />
-                                <span>Cinema</span>
+                                <span style={{color :'white'}}>Cinema</span>
                             </label>
-                        </li>
-                    </ul>
+                            </span></div>
+                          </fieldset>
+                            </div>
 
                 {/* Textbox for radius */}
-                <strong>Radius:</strong>
+                <br/>
+                <strong style={{color:'white'}}>Radius:</strong>
                             <label>
                                 <input
                                     type="text"

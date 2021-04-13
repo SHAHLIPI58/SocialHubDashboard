@@ -24,8 +24,8 @@ const Dashboard =(props)=>{
     });
 
     const [noResult, setNoResult] = useState(false);
-    const longlat = [{latitude:33.168936, longitude:-96.663925 },
-                     {latitude:33.04213,longitude:-96.75218}]
+    // const longlat = [{latitude:33.168936, longitude:-96.663925 },
+    //                  {latitude:33.04213,longitude:-96.75218}]
     const[latlogproperties,setLatlogproperties]= useState([])
 
 
@@ -92,7 +92,8 @@ const Dashboard =(props)=>{
             let latlogproperties = businesses.map((business,index) =>{
                         let properties = {
                             "longitude":  business.coordinates.longitude,
-                            "latitude": business.coordinates.latitude
+                            "latitude": business.coordinates.latitude,
+                            "b_name": business.name
                             };
                 return properties
             }) 
@@ -159,6 +160,12 @@ const Dashboard =(props)=>{
         <Header deleteToken={props.deleteToken} username={username}/>
         <section className={classes.Posts}>
             {
+                CardViews.length > 0? <GoogleMap longlat={latlogproperties}
+                                                userlongitude = {longitude}
+                                                userlatitude = {latitude} />: null
+            
+            }
+            {
                 CardViews.length > 0? CardViews :
                 (noResult? 
                         <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
@@ -166,12 +173,18 @@ const Dashboard =(props)=>{
             
             }
 
-            {
-                CardViews.length > 0? <GoogleMap longlat={latlogproperties} />: null
+        </section>
+        <section className={classes.Posts}>
+        {
+                CardViews.length > 0? CardViews :
+                (noResult? 
+                        <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
+                )
             
             }
-       
+
         </section>
+
         
 
     </div>)
