@@ -7,8 +7,11 @@ import SideNav from '../SideNav/SideNav'
 import MoonLoader from "react-spinners/MoonLoader";
 import NoResultFound from '../NoResultFound/NoResultFound';
 import GoogleMap from '../GoogleMap/GoogleMap';
+import { BrowserRouter, Route, Switch, Redirect,Link } from 'react-router-dom';
+import Rating from '../Rating/Rating';
 
-
+// Imported <ReactModal /> component
+import ReactModal from 'react-modal';
 
 const Dashboard =(props)=>{
 
@@ -26,7 +29,36 @@ const Dashboard =(props)=>{
     const [noResult, setNoResult] = useState(false);
     // const longlat = [{latitude:33.168936, longitude:-96.663925 },
     //                  {latitude:33.04213,longitude:-96.75218}]
-    const[latlogproperties,setLatlogproperties]= useState([])
+    const [latlogproperties,setLatlogproperties]= useState([]);
+
+
+    // Trying to populate data into the modal from CardView component
+    const [modalData, setModalData] = useState(null);
+    const handleSetModalData = (data) => {
+        setModalData(data)
+    };
+
+    // We are setting initial state for the Modal component i.e false
+    // this means, the modal will not be visible until set to "true"
+    const [showModal, setShowModal] = useState(false);
+
+
+    // Sets state to true, meaning modal will appear
+    const handleOpenModal = (data) => {
+        handleSetModalData(data);
+        setShowModal(true);
+      }
+      
+    // Sets state to false, meaning modal will disappear
+    const handleCloseModal = () => {
+        setShowModal(false);
+      }
+
+    
+    
+    
+
+
 
 
     
@@ -133,6 +165,9 @@ const Dashboard =(props)=>{
 
     }, [username, location,longitude,latitude, userPreference, noResult]);
 
+    // useEffect(() => {
+
+    // }, [showRatings]);
 
 
     // useEffect(() => {
@@ -141,21 +176,47 @@ const Dashboard =(props)=>{
 
 
     // console.log("length of locationBasedResults = ",locationBasedResults.length)
-    console.log("locationBasedResults =",locationBasedResults.length)
+    console.log("locationBasedResults =",locationBasedResults)
     
     const CardViews = locationBasedResults.map(CardViewRes=>{
-        return <CardView  key = {CardViewRes.id}
+        return (
+                        <CardView  key = {CardViewRes.id}
                           resName = {CardViewRes.name}
                           resImg ={CardViewRes.image_url}
                           price = {CardViewRes.price}
-                          rating={CardViewRes.rating}/>
+                          rating={CardViewRes.rating}
+                          openModal={handleOpenModal}
+                          
+                            />
+                )
     });
 
     console.log("cardviews: ", CardViews);
+
+
+    // Set some custom styling for ReactModal component
+    const customStyles = {
+        content : {
+          top                   : '50%',
+          left                  : '50%',
+          right                 : 'auto',
+          bottom                : 'auto',
+          marginRight           : '-50%',
+          transform             : 'translate(-50%, -50%)'
+        }
+      };
     
     return(
-    
     <div>
+        <ReactModal 
+           isOpen={showModal}
+           contentLabel="Minimal Modal Example"
+           style={customStyles}
+        > 
+            <Rating modalData={modalData} handleCloseModal={handleCloseModal}/>
+        
+        </ReactModal>
+        
         <SideNav userPreference={userPreference} setUserPreference={setUserPreference}/>
         <Header deleteToken={props.deleteToken} username={username}/>
         <section className={classes.Posts}>
@@ -174,6 +235,11 @@ const Dashboard =(props)=>{
             }
 
         </section>
+
+
+
+
+
         <section className={classes.Posts}>
         {
                 CardViews.length > 0? CardViews :
@@ -184,9 +250,6 @@ const Dashboard =(props)=>{
             }
 
         </section>
-
-        
-
     </div>)
 }
 export default Dashboard;
