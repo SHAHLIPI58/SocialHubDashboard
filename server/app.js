@@ -139,22 +139,29 @@ app.post('/search',(req,res)=>{
 
 })
 
-app.get('/ratings',(req,res)=>{
-     var name = "aashtha"
-     var fooditem ="panipuri"
-     var rating = 4
-     var category = "food"
+app.post('/ratings',(req,res)=>{
+     
+  
+     var username = req.body.userid
+     var itemid = req.body.itemid
+     var itemname = req.body.itemname
+     var rating = parseInt(req.body.rating)
+     var category = req.body.category
+     var pricelevel = req.body.pricelevel
+     var today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
+     console.log(today)
+     console.log("mongodb body request testing...",username, itemid, itemname, rating, category, pricelevel)
 
       //insert function
       const insertDocuments = function(db, callback) {
-        // Get the documents collection
-      const collection = db.collection('documents');
-      // Insert one documents or for more documents insertMany() instead of insert()
-      collection.insertOne({ name: name, fooditem : fooditem}, 
-          function(err, result) {
-        console.log('Inserted 44 documents into the collection');
-        callback(result);
-      });
+            // Get the documents collection
+          const collection = db.collection('documents');
+          // Insert one documents or for more documents insertMany() instead of insert()
+          collection.insertOne({ username: username, itemid : itemid, itemname: itemname, rating:rating,category:category,pricelevel:pricelevel,Date:new Date(today)}, 
+              function(err, result) {
+            console.log('Inserted 44 documents into the collection');
+            callback(result);
+          });
       };
 
 
@@ -166,13 +173,32 @@ app.get('/ratings',(req,res)=>{
 
       const db = client.db(dbName);
       insertDocuments(db, function() {
-      client.close();
+      // client.close();
       })
 
 
       });
       res.send("data ratings....")
 });
+
+
+app.get('/getanalysisData',(req,res)=>{
+
+  
+    //insert function
+    const findCountStart = function(db, callback) {
+      // Get the documents collection
+    const collection = db.collection('documents');
+    // Insert one documents or for more documents insertMany() instead of insert()
+    collection.insertOne({ username: username, itemid : itemid, itemname: itemname, rating:rating,category:category,pricelevel:pricelevel,Date:new Date(today)}, 
+        function(err, result) {
+      console.log('Inserted 44 documents into the collection');
+      callback(result);
+    });
+  };
+
+});
+
 
 app.get('/buy', (req, res) => {
     res.send(req.query.val+" 100");

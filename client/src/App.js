@@ -11,7 +11,7 @@ import Signup from './components/Signup/Signup'
 import BarChartComponent from './components/D3Charts/BarChartComponent'
 import BarChart from'./components/D3Charts/BarChart'
 import PieChart from './components/D3Charts/PieChart'
-import Rating from './components/Rating/Rating'
+
 
 
 // function setToken(userToken) {

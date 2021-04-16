@@ -22,3 +22,28 @@
 .Posts li{
     display:none ;
 }
+
+.Graphs {
+    display: flex;
+    flex-flow: row wrap;
+    /* justify-content: center; */
+    width: 80%;
+    height: 370px;
+    margin: auto;
+    float: right;
+    margin-top: 50px;
+    
+
+}
+
+.Graphs ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+.Graphs li{
+    display:none ;
+}
+

@@ -20,7 +20,7 @@ const SideNav = (props) => {
     const onRadiusTextChange = (e) => {
         setPreferences({
             ...preferences,
-            radius: e.target.value
+            radius: e.target.value 
         });
     };
 
@@ -31,19 +31,23 @@ const SideNav = (props) => {
         props.setUserPreference(preferences);
       }
 
+    const showVisualizationView = () => {
+        props.setShowVisualization(true);
+    }
+
+    const hideVisualizationView = () => {
+        props.setShowVisualization(false);
+    }
+
 return (
     <div>
 
 
         <div className={classes.sidenav}>
             
-
-             
-  
-
-            <form onSubmit={onSubmit}>
+            {props.showVisualization? <button onClick={hideVisualizationView}>Back to Recommendations</button>: <div><form onSubmit={onSubmit} style={{marginLeft:'20px'}}>
                 {/* Radio options for price */}
-                <strong style={{color:'white'}}>Price:</strong>
+                <strong style={{color:'white'}}>Price Level:</strong>
                 <div className={classes.verticalradiobuttons}>
                 <fieldset className ={classes.fieldsetProperties}>
                        <div><span>
@@ -54,7 +58,7 @@ return (
                                     checked={preferences.price === "1"}
                                     onChange={onPriceRadioChange}
                                 />
-                                <span style={{color :'white'}}>1</span>
+                                <span style={{color :'white'}}>$</span>
                             </label>
                             </span></div>
 
@@ -67,7 +71,7 @@ return (
                                     checked={preferences.price === "2"}
                                     onChange={onPriceRadioChange}
                                 />
-                                <span style={{color :'white'}}>2</span>
+                                <span style={{color :'white'}}>$$</span>
                             </label>
                             </span></div>
 
@@ -79,7 +83,7 @@ return (
                                     checked={preferences.price === "3"}
                                     onChange={onPriceRadioChange}
                                 />
-                                <span style={{color :'white'}}>3</span>
+                                <span style={{color :'white'}}>$$$</span>
                             </label>
                             </span></div>
 
@@ -91,7 +95,7 @@ return (
                                     checked={preferences.price === "4"}
                                     onChange={onPriceRadioChange}
                                 />
-                                <span style={{color :'white'}}>4</span>
+                                <span style={{color :'white'}}>$$$$</span>
                             </label>
                             </span></div>
                 </fieldset>
@@ -170,13 +174,17 @@ return (
                                     onChange={onRadiusTextChange}
                                 />
                             </label>
-                    
+                <br/>
+                <p></p>
                 <button type="submit">Filter</button>
+                
 
-        </form>
+            </form>
+            <button onClick={showVisualizationView}>Visualization</button>
+            </div>}
+            
         </div>
-        
-
+    
     </div>
  );
 };

@@ -8,10 +8,12 @@ import MoonLoader from "react-spinners/MoonLoader";
 import NoResultFound from '../NoResultFound/NoResultFound';
 import GoogleMap from '../GoogleMap/GoogleMap';
 import { BrowserRouter, Route, Switch, Redirect,Link } from 'react-router-dom';
-import Rating from '../Rating/Rating';
+import Rating from '../rating/Rating';
+import Visualization from '../Visualization/Visualization'
 
 // Imported <ReactModal /> component
 import ReactModal from 'react-modal';
+import Button from '@material-ui/core/Button';
 
 const Dashboard =(props)=>{
 
@@ -33,7 +35,7 @@ const Dashboard =(props)=>{
 
 
     // Trying to populate data into the modal from CardView component
-    const [modalData, setModalData] = useState(null);
+    const [modalData, setModalData] = useState([]);
     const handleSetModalData = (data) => {
         setModalData(data)
     };
@@ -41,6 +43,9 @@ const Dashboard =(props)=>{
     // We are setting initial state for the Modal component i.e false
     // this means, the modal will not be visible until set to "true"
     const [showModal, setShowModal] = useState(false);
+
+   
+    const [showVisualization, setShowVisualization] = useState(false);
 
 
     // Sets state to true, meaning modal will appear
@@ -53,6 +58,8 @@ const Dashboard =(props)=>{
     const handleCloseModal = () => {
         setShowModal(false);
       }
+
+    
 
     
     
@@ -185,6 +192,10 @@ const Dashboard =(props)=>{
                           resImg ={CardViewRes.image_url}
                           price = {CardViewRes.price}
                           rating={CardViewRes.rating}
+                          review_count = {CardViewRes.review_count}
+                          display_address = {CardViewRes.location.display_address}
+                          phone = {CardViewRes.phone}
+                          resId = {CardViewRes.id}
                           openModal={handleOpenModal}
                           
                             />
@@ -202,54 +213,64 @@ const Dashboard =(props)=>{
           right                 : 'auto',
           bottom                : 'auto',
           marginRight           : '-50%',
-          transform             : 'translate(-50%, -50%)'
+          transform             : 'translate(-50%, -50%)',
+          backgroundColor       : 'white'
+     
+
         }
       };
     
-    return(
-    <div>
-        <ReactModal 
-           isOpen={showModal}
-           contentLabel="Minimal Modal Example"
-           style={customStyles}
-        > 
-            <Rating modalData={modalData} handleCloseModal={handleCloseModal}/>
-        
-        </ReactModal>
-        
-        <SideNav userPreference={userPreference} setUserPreference={setUserPreference}/>
-        <Header deleteToken={props.deleteToken} username={username}/>
-        <section className={classes.Posts}>
-            {
-                CardViews.length > 0? <GoogleMap longlat={latlogproperties}
-                                                userlongitude = {longitude}
-                                                userlatitude = {latitude} />: null
-            
-            }
-            {
-                CardViews.length > 0? CardViews :
-                (noResult? 
-                        <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
-                )
-            
-            }
+    return(<div>
+                <ReactModal 
+                isOpen={showModal}
+                contentLabel="Minimal Modal Example"
+                style={customStyles}
+                > 
+                    <Rating modalData={modalData}
+                            userPreferenceCategory = {`${userPreference.category}`}
+                            username = {username}
+                            handleCloseModal={handleCloseModal}/>
+                
+                </ReactModal>
+                
+                <SideNav 
+                    userPreference={userPreference} 
+                    setUserPreference={setUserPreference}
+                    setShowVisualization={setShowVisualization} 
+                    showVisualization={showVisualization}/>
+                <Header deleteToken={props.deleteToken} username={username}/>
+                {showVisualization? <div className={classes.Graphs}><Visualization /></div> : <div>
+                    <section className={classes.Posts}>
+                    
+                        {
+                            CardViews.length > 0? <GoogleMap longlat={latlogproperties}
+                                                            userlongitude = {longitude}
+                                                            userlatitude = {latitude} />: null
+                        
+                        }
+                        {
+                            CardViews.length > 0? CardViews :
+                            (noResult? 
+                                    <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
+                            )
+                        
+                        }
 
-        </section>
+                    </section>
 
 
+                    <section className={classes.Posts}>
+                    {
+                            CardViews.length > 0? CardViews :
+                            (noResult? 
+                                    <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
+                            )
+                        
+                        }
 
-
-
-        <section className={classes.Posts}>
-        {
-                CardViews.length > 0? CardViews :
-                (noResult? 
-                        <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
-                )
-            
-            }
-
-        </section>
-    </div>)
+                    </section>
+                </div>}
+            </div>
+    )
 }
 export default Dashboard;
