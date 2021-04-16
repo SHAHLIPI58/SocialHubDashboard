@@ -1,18 +1,23 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import * as d3 from "d3";
 
-class BarChart extends Component {
+function BarChart (props) {
 
-    componentDidMount() {
-        this.drawChart();
-    }
+    useEffect(() => {
+      drawChart();
+    }, [])
 
-    drawChart() {
+    const drawChart = () => {
         const data = [12, 5, 6, 6, 9, 10];
         const h = 200
         const w =420
 
-        const svg = d3.select("body")
+        // Remove the old svg
+        d3.select(`#${props.chartId}`)
+        .select('svg')
+        .remove();
+
+        const svg = d3.select(`#${props.chartId}`)
         .append("svg")
         .attr("width", w)
         .attr("height", h)
@@ -40,10 +45,7 @@ class BarChart extends Component {
           .attr("y", (d, i) => h - (10 * d) - 3)
       }
 
-      render(){
-        return <div id={"#" + this.props.id}></div>
-      }
-
+        return <div id={props.chartId}></div>
 }
 
 export default BarChart;

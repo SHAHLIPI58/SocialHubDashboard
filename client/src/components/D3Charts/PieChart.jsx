@@ -26,13 +26,13 @@ function PieChart(props) {
 
   function drawChart() {
     // Remove the old svg
-    d3.select('#pie-container')
+    d3.select(`#${props.chartId}`)
       .select('svg')
       .remove();
 
     // Create new svg
     const svg = d3
-      .select('#pie-container')
+      .select(`#${props.chartId}`)
       .append('svg')
       .attr('width', width)
       .attr('height', height)
@@ -60,7 +60,8 @@ function PieChart(props) {
       .attr('d', arcGenerator)
       .style('fill', (_, i) => colorScale(i))
       .style('stroke', '#ffffff')
-      .style('stroke-width', 0);
+      .style('stroke-width', 0)
+      //align-content: center;
 
     // Append text labels
     arc
@@ -75,7 +76,7 @@ function PieChart(props) {
       });
   }    
 
-  return <div id="pie-container" />;
+  return <div id={props.chartId} />;
 }
 
 export default PieChart;

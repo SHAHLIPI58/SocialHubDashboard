@@ -19,7 +19,7 @@ const BarChartComponent = (props)=>{
     return(<div>
          <h2>Graphs with React</h2>
            
-           <BarChart1 width={600} height={400} data={data} />
+           <BarChart1 width={400} height={400} data={data} />
     </div>)
 
 }

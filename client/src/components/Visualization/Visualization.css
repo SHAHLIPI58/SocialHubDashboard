@@ -1,4 +1,54 @@
-.graph {
+.CardView {
+    width: 300px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    margin: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+   
+}
+
+
+.CardView:hover,
+.CardView:active {
+    background-color: #C0DDF5;
+}
+
+.Author {
+    margin: 16px 0;
+    color: #ccc;
+}
+
+.cardviewimg{
+  height: 200px;
+  width: 250px;
+
+}
+
+
+
+.wrapper {
+    display: flex;
+    border: 1px solid black;
+  }
+  .first {
+      border: 1px solid red;
+  }
+  .second {
+      border: 1px solid green;
+  }
+
+  .svgContainer{
+      display: block;
+      margin-left: 250px;
+      margin-right: auto;
+      width: 50%;
+  }
+/* .graph {
     border: 1px solid #eee;
     margin: 10px;
     display: inline-block;
@@ -6,4 +56,11 @@
     padding: 20px;
     box-shadow: 0 2px 2px #ccc;
     overflow: auto;
+} */
+
+.break {
+    background: #3E87BC;
+    height: 2px;
+    margin: 5px 0 10px 0;
+    width: 100%;
 }

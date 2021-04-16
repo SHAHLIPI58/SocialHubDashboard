@@ -107,6 +107,7 @@ const App = (props)=> {
          {/* <PieChart data = {data}
                   outerRadius={100}
                   innerRadius = {0}/> */}
+          
          
       </div>
     );

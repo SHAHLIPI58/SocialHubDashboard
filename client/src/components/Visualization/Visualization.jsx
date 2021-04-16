@@ -5,7 +5,10 @@ import Header from '../Header/Header'
 import SideNav from '../SideNav/SideNav'
 import MoonLoader from "react-spinners/MoonLoader";
 import { BrowserRouter, Route, Switch, Redirect,Link } from 'react-router-dom';
-import PieChart from '../D3Charts/PieChart'
+import PieChart from '../D3Charts/PieChart';
+import BarChartComponent from '../D3Charts/BarChartComponent'
+import BarChart from '../D3Charts/BarChart'
+
 
 const Visualization =(props)=>{
     
@@ -14,8 +17,30 @@ const Visualization =(props)=>{
 
     const data = [{ label: 'Apples', value: 10 }, { label: 'Oranges', value: 20 },{ label: 'Pineaaple', value: 20 }];
     return(<div>
-        <div className={classes.graph}><PieChart data = {data} outerRadius={100} innerRadius = {0}/></div>
-        <div className={classes.graph}><PieChart data = {data} outerRadius={100} innerRadius = {0}/></div>
+        
+         
+            
+            <BarChart chartId="barchartid1"/>
+            {/* <hr /> */}
+            <div className = {classes.svgContainer}>
+                <PieChart data = {data} outerRadius={100} innerRadius = {0} chartId={"pie-container-2"}/>
+            </div>
+            {/* <div className = {classes.break} /> */}
+           <BarChart chartId="barchartid2"/>
+           <div className = {classes.svgContainer} >
+                <PieChart data = {data} outerRadius={100} innerRadius = {0} chartId={"pie-container-3"}/>
+            </div>
+            <BarChart chartId="barchartid3"/>
+            <br></br>
+            <h1>BarChart Based On Category</h1>
+            <BarChart chartId="barchartid4"/>
+            
+            
+        
+      
+        
+        
+       
     </div>)
 }
 
