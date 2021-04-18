@@ -239,7 +239,7 @@ const Dashboard =(props)=>{
                     setShowVisualization={setShowVisualization} 
                     showVisualization={showVisualization}/>
                 <Header deleteToken={props.deleteToken} username={username}/>
-                {showVisualization? <div className={classes.Graphs}><Visualization /></div> : <div>
+                {showVisualization? <div className={classes.Graphs}><Visualization username={username}/></div> : <div>
                     <section className={classes.Posts}>
                     
                         {

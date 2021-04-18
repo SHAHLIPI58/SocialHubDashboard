@@ -43,7 +43,24 @@ function BarChart (props) {
           .text((d) => d)
           .attr("x", (d, i) => i * 70)
           .attr("y", (d, i) => h - (10 * d) - 3)
+
+        //         // Create the scale
+        // var x = d3.scaleLinear()
+        // .domain([0, 100])         // This is what is written on the Axis: from 0 to 100
+        // .range([100, 800]);       // This is where the axis is placed: from 100px to 800px
+
+        // // Draw the axis
+        // svg
+        //   .append("g")
+        //   .attr("transform", "translate(-75,50)")      // This controls the vertical position of the Axis
+        //   .call(d3.axisBottom(x));
+
+
       }
+      
+      
+
+     
 
         return <div id={props.chartId}></div>
 }

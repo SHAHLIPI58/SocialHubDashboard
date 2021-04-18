@@ -12,6 +12,8 @@ var connection = mysqlcontroller
 var mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
 
+const { MongoClient1 } = require('mongodb');
+
 // Connection URL
 const url = 'mongodb://localhost:27017';
 
@@ -182,20 +184,261 @@ app.post('/ratings',(req,res)=>{
 });
 
 
-app.get('/getanalysisData',(req,res)=>{
+
+
+
+
+
+app.post('/getfindCountStartanalysisData',(req,res)=>{
+  var username = req.body.username,
+   userratings = {
+    ratingObject: []
+};
+
+  async function main() {
+    /**
+     * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+     * See https://docs.mongodb.com/drivers/node/ for more details
+     */
+    const uri = "mongodb://localhost:27017/testingMongo";
+
+    /**
+     * The Mongo Client you will use to interact with your database
+     * See https://mongodb.github.io/node-mongodb-native/3.6/api/MongoClient.html for more details
+     */
+    const client = new MongoClient(uri);
+
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+
+        // Make the appropriate DB calls
+
+        // Print the 10 cheapest suburbs in the Sydney, Australia market
+        await printCountByStart(client, username);
+
+    } finally {
+        // Close the connection to the MongoDB cluster
+        await client.close();
+    }
+}
+
+main().catch(console.error);
+
+/**
+ * Print the cheapest suburbs for a given market
+ * @param {MongoClient} client A MongoClient that is connected to a cluster with the sample_airbnb database
+ * @param {String} country The country for the given market
+ * @param {String} market The market you want to search
+ * @param {number} maxNumberToPrint The maximum number of suburbs to print
+ */
+async function printCountByStart(client, username) {
+    const pipeline = [
+      { '$match': { username: username} },
+      { '$group': { '_id': "$rating", 'count': { '$sum': 1 } } }
+    ];
+
+    // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#aggregate for the aggregate() docs
+    const aggCursor = client.db("testingMongo").collection("documents").aggregate(pipeline);
 
   
-    //insert function
-    const findCountStart = function(db, callback) {
-      // Get the documents collection
-    const collection = db.collection('documents');
-    // Insert one documents or for more documents insertMany() instead of insert()
-    collection.insertOne({ username: username, itemid : itemid, itemname: itemname, rating:rating,category:category,pricelevel:pricelevel,Date:new Date(today)}, 
-        function(err, result) {
-      console.log('Inserted 44 documents into the collection');
-      callback(result);
+  
+
+    await aggCursor.forEach(ratingListing => {
+
+      var item = ratingListing;
+      userratings.ratingObject.push({
+        label :`${item._id}star`,
+        value :item.count
+      });
+        //console.log(`${ratingListing._id}: ${ratingListing.count}`);
+        //console.log(userratings)
     });
-  };
+    console.log(userratings.ratingObject)
+    res.send(userratings.ratingObject)
+}
+
+
+
+
+})
+
+
+app.post('/getfindCountCategorySanalysisData',(req,res)=>{
+   var username = req.body.username
+  // var uname = req.body.username
+   console.log("username in getfindCountCategorySanalysisData",req.body.data)
+   usercategoryratings = {
+    categoryratingObject: []
+};
+
+  async function main() {
+
+   
+    /**
+     * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+     * See https://docs.mongodb.com/drivers/node/ for more details
+     */
+    const uri = "mongodb://localhost:27017/testingMongo";
+
+    /**
+     * The Mongo Client you will use to interact with your database
+     * See https://mongodb.github.io/node-mongodb-native/3.6/api/MongoClient.html for more details
+     */
+    const client = new MongoClient(uri);
+
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+        
+
+        // Make the appropriate DB calls
+
+        
+        await printCountByCategory(client, username);
+
+    } finally {
+        // Close the connection to the MongoDB cluster
+        await client.close();
+    }
+}
+
+main().catch(console.error);
+
+/**
+ * Print the cheapest suburbs for a given market
+ * @param {MongoClient} client A MongoClient that is connected to a cluster with the sample_airbnb database
+ * @param {String} username 
+
+ */
+async function printCountByCategory(client, username) {
+    const pipeline = [
+      { '$match': { username: username} },
+      { '$group': { '_id': "$category", 'count': { '$sum': 1 } } }
+    ];
+
+    // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#aggregate for the aggregate() docs
+    const aggCursor = client.db("testingMongo").collection("documents").aggregate(pipeline);
+
+  
+  
+
+    await aggCursor.forEach(categoryratingListing => {
+
+      var item = categoryratingListing;
+      usercategoryratings.categoryratingObject.push({
+        label :`${item._id}`,
+        value :item.count
+      });
+        //console.log(`${ratingListing._id}: ${ratingListing.count}`);
+        //console.log(userratings)
+    });
+    console.log(usercategoryratings.categoryratingObject)
+    res.send(usercategoryratings.categoryratingObject)
+}
+
+
+
+
+})
+
+
+
+app.get('/testingmongo',(req,res)=>{
+
+
+  async function main() {
+    /**
+     * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+     * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
+     */
+    const uri = "mongodb://localhost:27017/testingMongo";
+
+    /**
+     * The Mongo Client you will use to interact with your database
+     * See https://mongodb.github.io/node-mongodb-native/3.6/api/MongoClient.html for more details
+     */
+    const client = new MongoClient(uri);
+
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+
+        // Make the appropriate DB calls
+        await listDatabases(client);
+
+    } catch (e) {
+        console.error(e);
+    } finally {
+        // Close the connection to the MongoDB cluster
+        await client.close();
+    }
+}
+
+main().catch(console.error);
+
+/**
+ * Print the names of all available databases
+ * @param {MongoClient} client A MongoClient that is connected to a cluster
+ */
+async function listDatabases(client) {
+    databasesList = await client.db().admin().listDatabases();
+
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
+
+res.send("testing mongo database lisr...")
+
+
+
+})
+
+
+
+
+app.get('/kkkgetfindCountStartanalysisData_old',(req,res)=>{
+
+  
+  //insert function
+  const findCountStart =  function(db, callback) {
+    // Get the documents collection
+  const collection = db.collection('documents');
+  // // Insert one documents or for more documents insertMany() instead of insert()
+  // collection.insertOne({ username: username, itemid : itemid, itemname: itemname, rating:rating,category:category,pricelevel:pricelevel,Date:new Date(today)}, 
+  //     function(err, result) {
+  //   console.log('Inserted 44 documents into the collection');
+  //   callback(result);
+  // });
+
+  //findCountStart
+  const aggCursor = collection.aggregate([ { '$match': { username: "Lipi"} },
+                          { '$group': { '_id': "$rating", 'count': { '$sum': 1 } } }],
+                   function(err,result){ 
+                     console.log(result.toArray())
+                     
+                    callback(result);
+                   })
+
+};
+
+
+// Use connect method to connect to the server
+const mongoConnection = client.connect(function(err) {
+
+  console.log('Mongo Connected successfully to server ...aggregate function');
+
+  const db = client.db(dbName);
+   findCountStart(db, function() {
+  // client.close();
+  })
+
+
+  });
+  res.send("rating aggregation....")
+
+
+
 
 });
 
