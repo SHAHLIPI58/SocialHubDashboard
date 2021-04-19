@@ -13,6 +13,7 @@ import BarChart3 from '../D3Charts/BarChart3'
 import PieChartCategoryCount from './PieChartCategoryCount'
 import BarChartStartCount from './BarChartStartCount'
 import BarChartPriceCount from './BarChartPriceCount'
+import PieChartFavCategoryCount from './PieChartFavCategoryCount'
 
 
 const Visualization =(props)=>{
@@ -26,15 +27,30 @@ const Visualization =(props)=>{
     return(<div>
 
             <div className = {classes.svgContainer}>
+            <strong style={{color:'black',marginLeft:'140px'}}>CategoryWise User Ratings Count</strong> 
                 <PieChartCategoryCount username={props.username} />
             </div>
             
+            <br></br>
+            
             <div className = {classes.svgContainer}>
+                <strong style={{color:'black',marginLeft:'160px'}}>StarWise User Ratings Count</strong>
+                <br></br> 
                 <BarChartStartCount username={props.username}/>
             </div>
-
+            <br></br>
             <div className = {classes.svgContainer}>
+            <br></br>
+                <strong style={{color:'black',marginLeft:'130px'}}>PriceLevelWise User Ratings Count</strong> 
+                <br></br>
                 <BarChartPriceCount username={props.username}/>
+            </div>
+            <br></br>
+            <br></br>
+            <div className = {classes.svgContainer}>
+            <br></br>
+            <strong style={{color:'black',marginLeft:'100px'}}>Top 3 Categories User Ratings &gt; 3 Stars</strong>
+                <PieChartFavCategoryCount username={props.username} />
             </div>
 
             
@@ -42,23 +58,23 @@ const Visualization =(props)=>{
           
             
             {/* <hr /> */}
-            <div className = {classes.svgContainer}>
+            {/* <div className = {classes.svgContainer}>
                 <PieChart data = {data} outerRadius={200} innerRadius = {0} chartId={"pie-container-2"}/>
-            </div>
+            </div> */}
 
             {/* <div className = {classes.break} /> */}
-            <div className = {classes.svgContainer}>
+            {/* <div className = {classes.svgContainer}>
                 <BarChart chartId="barchartid2"/>
-            </div>
+            </div> */}
            
-           <div className = {classes.svgContainer} >
+           {/* <div className = {classes.svgContainer} >
                 <PieChart data = {data} outerRadius={100} innerRadius = {0} chartId={"pie-container-3"}/>
             </div>
             <BarChart chartId="barchartid3"/>
             <br></br>
             <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BarChart Based On Category</h1>
             <BarChart chartId="barchartid4"/>
-            <BarChart chartId="barchartid1"/>
+            <BarChart chartId="barchartid1"/> */}
             
             
         

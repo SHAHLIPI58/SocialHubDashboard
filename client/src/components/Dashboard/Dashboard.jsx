@@ -239,36 +239,58 @@ const Dashboard =(props)=>{
                     setShowVisualization={setShowVisualization} 
                     showVisualization={showVisualization}/>
                 <Header deleteToken={props.deleteToken} username={username}/>
-                {showVisualization? <div className={classes.Graphs}><Visualization username={username}/></div> : <div>
-                    <section className={classes.Posts}>
-                    
-                        {
-                            CardViews.length > 0? <GoogleMap longlat={latlogproperties}
-                                                            userlongitude = {longitude}
-                                                            userlatitude = {latitude} />: null
+                {showVisualization? <div className={classes.Graphs}><Visualization username={username}/></div> : 
+                <div>
+                    <div>
+                        <section className={classes.Posts}>
                         
-                        }
-                        {
-                            CardViews.length > 0? CardViews :
-                            (noResult? 
-                                    <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
-                            )
+                            {
+                                CardViews.length > 0? <GoogleMap longlat={latlogproperties}
+                                                                userlongitude = {longitude}
+                                                                userlatitude = {latitude} />: null
+                            
+                            }
+                            {
+                                CardViews.length > 0? CardViews :
+                                (noResult? 
+                                        <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
+                                )
+                            
+                            }
+
+                        </section>
+                    </div>
+                    {/* <div style={{width:'150%', height:'10px',position:'relative',background:'orange'}}>   
+                       
+                            <h1>Recommendation</h1>
+                                         
+                   </div> */}
+                   <div className={classes.fixedheader1}>
+                       <div >
+                           <br/>
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong style={{color:'white'}}>Recommendations</strong> 
+                   </div>
+                       </div>
+                     
+
+
+
+
+                    <div >
                         
-                        }
-
-                    </section>
-
-
-                    <section className={classes.Posts}>
-                    {
-                            CardViews.length > 0? CardViews :
-                            (noResult? 
-                                    <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
-                            )
                         
-                        }
+                        <section className={classes.Posts} style={{marginTop:'120px'}}>
+                            
+                        {      
+                                CardViews.length > 0? CardViews :
+                                (noResult? 
+                                        <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
+                                )
+                            
+                            }
 
-                    </section>
+                        </section>
+                    </div>
                 </div>}
             </div>
     )

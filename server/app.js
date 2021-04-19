@@ -238,6 +238,7 @@ async function printCountByStart(client, username) {
     const pipeline = [
       { '$match': { username: username} },
       { '$group': { '_id': "$rating", 'count': { '$sum': 1 } } },
+      { '$sort' :{rating:1}}
      
     ];
 
@@ -421,6 +422,80 @@ async function printCountByPrice(client, username) {
 
     console.log("nodejs", Object.keys(resfinal))
     res.send(resfinal)
+}
+
+
+
+
+})
+
+
+
+app.post('/getfindCountFavCatanalysisData',(req,res)=>{
+  var username = req.body.username
+  console.log("username in getfindCountCategorySanalysisData",req.body.data)
+  usercategoryratingsfav = {
+   categoryratingObjectfav: []
+};
+
+ async function main() {
+
+   const uri = "mongodb://localhost:27017/testingMongo";
+
+ 
+   const client = new MongoClient(uri);
+
+   try {
+       // Connect to the MongoDB cluster
+       await client.connect();
+       
+
+       // Make the appropriate DB calls
+
+       
+       await printCountByFavCategory(client, username);
+
+   } finally {
+       // Close the connection to the MongoDB cluster
+       await client.close();
+   }
+}
+
+main().catch(console.error);
+
+/**
+* Print the cheapest suburbs for a given market
+* @param {MongoClient} client A MongoClient that is connected to a cluster with the sample_airbnb database
+* @param {String} username 
+
+*/
+async function printCountByFavCategory(client, username) {
+   const pipeline = [
+     { '$match': { username: username,  rating:{$gt:3}} },
+     { '$group': { '_id': "$category", 'count': { '$sum': 1 } } },
+     {'$limit' : 3},
+     { '$sort' :{count:-1}}
+     
+   ];
+
+   // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#aggregate for the aggregate() docs
+   const aggCursor = client.db("testingMongo").collection("documents").aggregate(pipeline);
+
+ 
+ 
+
+   await aggCursor.forEach(categoryratingListingfav => {
+
+     var item = categoryratingListingfav;
+     usercategoryratingsfav.categoryratingObjectfav.push({
+       label :`${item._id}`,
+       value :item.count
+     });
+       //console.log(`${ratingListing._id}: ${ratingListing.count}`);
+       //console.log(userratings)
+   });
+   console.log(usercategoryratingsfav.categoryratingObjectfav)
+   res.send(usercategoryratingsfav.categoryratingObjectfav)
 }
 
 

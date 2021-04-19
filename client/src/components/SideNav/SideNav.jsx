@@ -180,7 +180,8 @@ return (
                 
 
             </form>
-            <button onClick={showVisualizationView}>Visualization</button>
+            <br/>
+            <button onClick={showVisualizationView}  style={{marginLeft:'20px'}}>Visualization</button>
             </div>}
             
         </div>
