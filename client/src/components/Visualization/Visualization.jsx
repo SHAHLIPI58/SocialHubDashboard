@@ -11,6 +11,8 @@ import BarChart from '../D3Charts/BarChart'
 import BarChart2 from '../D3Charts/BarChart2'
 import BarChart3 from '../D3Charts/BarChart3'
 import PieChartCategoryCount from './PieChartCategoryCount'
+import BarChartStartCount from './BarChartStartCount'
+import BarChartPriceCount from './BarChartPriceCount'
 
 
 const Visualization =(props)=>{
@@ -28,12 +30,14 @@ const Visualization =(props)=>{
             </div>
             
             <div className = {classes.svgContainer}>
-                <BarChart3 chartId="barchartid6"/>
+                <BarChartStartCount username={props.username}/>
             </div>
 
             <div className = {classes.svgContainer}>
-                <BarChart2 chartId="barchartid5"/>
+                <BarChartPriceCount username={props.username}/>
             </div>
+
+            
 
           
             

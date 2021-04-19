@@ -1,22 +1,28 @@
 
-import React, {Component, useEffect} from 'react';
+import React, {Component, useEffect,useState} from 'react';
 import * as d3 from "d3";
 
 function BarChart3 (props) {
-
+   
+  
+      
     useEffect(() => {
-      drawChart();
-    }, [])
+        if(Object.keys(props.data).length > 0){
+            drawChart();
+        }
+        //drawChart();
+        //console.log("useEffect Barchart3",props.data)
+
+   },[props.data])
+
+   
 
     const drawChart = () => {
-        let data = {
-            "FACEBOOK": 3,
-            "GITHUB"  : 10,
-            "GOOGLE"  : 6,
-            "TWITTER" : 1,
-            "WEIBO"   : 1
-        };
+
         
+        let data = props.data
+
+    
         let margin = {top: 20, right: 20, bottom: 30, left: 40};
         let svgWidth = 590, svgHeight = 300;
         let height = svgHeight- margin.top- margin.bottom, width = svgWidth - margin.left - margin.right;
@@ -72,10 +78,11 @@ function BarChart3 (props) {
             .attr("width", x.bandwidth())
             .attr("height", function(d) { return height - y(data[d]); })
 	        .attr("fill", function(d) {
-                if (data[d] < 3) {
-                  return "red";
+                if (data[d] < 5) {
+                  return " #6e40aa";
+                 
                 }
-                return "blue";
+                return "#1ac7c2";
               });
             
         bars.append("text")
@@ -97,7 +104,7 @@ function BarChart3 (props) {
       }
       
       
-
+       //drawChart();
      
 
         return <div id={props.chartId}></div>

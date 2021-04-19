@@ -190,11 +190,13 @@ app.post('/ratings',(req,res)=>{
 
 
 app.post('/getfindCountStartanalysisData',(req,res)=>{
-  var username = req.body.username,
-   userratings = {
-    ratingObject: []
-};
+  var username = req.body.username
+  
+//   userratings = {
+//     ratingObject: []
+// };
 
+var finalres ={}
   async function main() {
     /**
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
@@ -235,7 +237,8 @@ main().catch(console.error);
 async function printCountByStart(client, username) {
     const pipeline = [
       { '$match': { username: username} },
-      { '$group': { '_id': "$rating", 'count': { '$sum': 1 } } }
+      { '$group': { '_id': "$rating", 'count': { '$sum': 1 } } },
+     
     ];
 
     // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#aggregate for the aggregate() docs
@@ -243,19 +246,35 @@ async function printCountByStart(client, username) {
 
   
   
-
+    var resfinal ={}
     await aggCursor.forEach(ratingListing => {
-
+      
       var item = ratingListing;
-      userratings.ratingObject.push({
-        label :`${item._id}star`,
-        value :item.count
-      });
-        //console.log(`${ratingListing._id}: ${ratingListing.count}`);
+      // userratings.ratingObject.push({
+      
+      //   [`${item._id}star`]:item.count
+      // });
+
+      resfinal[`${item._id}STAR`] = item.count
+
+        console.log(`${ratingListing._id}: ${ratingListing.count}`);
         //console.log(userratings)
+        // finalres = {
+        //   label :`${item._id}star`,
+        //   value :item.count
+        // }
+        // let stringoutput = `${item._id}star`
+        // finalres[stringoutput] = item.count
+        
+      
     });
-    console.log(userratings.ratingObject)
-    res.send(userratings.ratingObject)
+
+   
+   
+
+  
+    console.log("nodejs", Object.keys(resfinal))
+    res.send(resfinal)
 }
 
 
@@ -335,6 +354,73 @@ async function printCountByCategory(client, username) {
     });
     console.log(usercategoryratings.categoryratingObject)
     res.send(usercategoryratings.categoryratingObject)
+}
+
+
+
+
+})
+
+
+
+app.post('/getfindCountPriceanalysisData',(req,res)=>{
+  var username = req.body.username
+
+ var finalres ={}
+  async function main() {
+  
+    const uri = "mongodb://localhost:27017/testingMongo";
+    const client = new MongoClient(uri);
+
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+
+        // Make the appropriate DB calls
+
+        // Print the 10 cheapest suburbs in the Sydney, Australia market
+        await printCountByPrice(client, username);
+
+    } finally {
+        // Close the connection to the MongoDB cluster
+        await client.close();
+    }
+}
+
+main().catch(console.error);
+
+/**
+ * Print the cheapest suburbs for a given market
+ * @param {MongoClient} client A MongoClient that is connected to a cluster with the sample_airbnb database
+ * @param {String} pricelevel
+ */
+async function printCountByPrice(client, username) {
+    const pipeline = [
+      { '$match': { username: username} },
+      { '$group': { '_id': "$pricelevel", 'count': { '$sum': 1 } } },
+     
+    ];
+
+    // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#aggregate for the aggregate() docs
+    const aggCursor = client.db("testingMongo").collection("documents").aggregate(pipeline);
+
+  
+  
+    var resfinal ={}
+    await aggCursor.forEach(priceListing => {
+      
+      var item = priceListing;
+    
+
+      resfinal[`${item._id}`] = item.count
+
+      console.log(`${priceListing._id}: ${priceListing.count}`);
+        
+      
+    });
+
+    console.log("nodejs", Object.keys(resfinal))
+    res.send(resfinal)
 }
 
 

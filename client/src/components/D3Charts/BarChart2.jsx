@@ -4,19 +4,26 @@ import * as d3 from "d3";
 
 function BarChart2 (props) {
 
+   
+
     useEffect(() => {
-      drawChart();
-    }, [])
+        if(Object.keys(props.data).length > 0){
+            drawChart();
+        }
+    
+
+   },[props.data])
 
     const drawChart = () => {
-        let data = {
-            "FACEBOOK": 3,
-            "GITHUB"  : 10,
-            "GOOGLE"  : 6,
-            "TWITTER" : 1,
-            "WEIBO"   : 1
-        };
-        let margin = {top: 20, right: 30, bottom: 30, left: 80};
+        // let data = {
+        //     "FACEBOOK": 3,
+        //     "GITHUB"  : 10,
+        //     "GOOGLE"  : 6,
+        //     "TWITTER" : 1,
+        //     "WEIBO"   : 1
+        // };
+        let data = props.data
+        let margin = {top: 20, right: 30, bottom: 30, left: 40};
         let svgWidth = 590, svgHeight = 300;
         let height = svgHeight- margin.top- margin.bottom, width = svgWidth - margin.left - margin.right;
         let sourceNames = [], sourceCount = [];
@@ -59,7 +66,15 @@ function BarChart2 (props) {
             .attr('class', 'bar')
             .attr("x", function(d) { return 0; })
             .attr("y", function(d) { return y(d); })
-            .attr("fill", "pink")
+            .attr("fill", function(d) {
+                if (data[d] < 4) {
+                  return "#417de0";
+                }else if(data[d] >= 4 && data[d] <= 10){
+                    return "pink";
+                }
+                return "#1ac7c2";
+              })  
+             
             .attr("width", function(d){return x(data[d])})
             .attr("height", function(d) { return y.bandwidth(); });
             
@@ -76,7 +91,7 @@ function BarChart2 (props) {
             })
             .attr("font-family" , "sans-serif")
             .attr("font-size" , "14px")
-            .attr("fill" , "orange")
+            .attr("fill" , "black")
             .attr("text-anchor", "middle");
 
 

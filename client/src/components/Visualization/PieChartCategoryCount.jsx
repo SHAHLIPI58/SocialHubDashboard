@@ -4,7 +4,7 @@ import  { useState } from 'react';
 import axios from 'axios';
 import PieChart from '../D3Charts/PieChart'
 
-//'/getfindCountCategorySanalysisData' --> get request
+//'/getfindCountCategorySanalysisData' --> post request
 const PieChartCategoryCount = (props)=>{
 
     const [data, setData] = useState([]);
