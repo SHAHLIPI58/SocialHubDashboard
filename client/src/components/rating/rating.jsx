@@ -27,7 +27,7 @@ const Rating =(props)=>{
                 
             },
           ).then(response => {
-              console.log("api call returned: ", response.data);
+              console.log("api call returned in modal: ", response.data);
               props.handleCloseModal();
            
               

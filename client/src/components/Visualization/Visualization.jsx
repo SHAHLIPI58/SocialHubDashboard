@@ -49,7 +49,7 @@ const Visualization =(props)=>{
             <br></br>
             <div className = {classes.svgContainer}>
             <br></br>
-            <strong style={{color:'black',marginLeft:'100px'}}>Top 3 Categories User Ratings &gt; 3 Stars</strong>
+            <strong style={{color:'black',marginLeft:'70px'}}>TopMost 3 Categories User Ratings &gt; 3 Stars</strong>
                 <PieChartFavCategoryCount username={props.username} />
             </div>
 

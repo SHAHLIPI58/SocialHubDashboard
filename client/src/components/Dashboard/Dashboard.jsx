@@ -10,6 +10,7 @@ import GoogleMap from '../GoogleMap/GoogleMap';
 import { BrowserRouter, Route, Switch, Redirect,Link } from 'react-router-dom';
 import Rating from '../rating/Rating';
 import Visualization from '../Visualization/Visualization'
+import { scroller } from "react-scroll";
 
 // Imported <ReactModal /> component
 import ReactModal from 'react-modal';
@@ -63,7 +64,15 @@ const Dashboard =(props)=>{
 
     
 
-    
+      
+
+      const scrollToSection = () => {
+        scroller.scrollTo("scrollHere", {
+          duration: 1000,
+          delay: 0,
+          smooth: "easeInOutQuart",
+        });
+      };
     
     
 
@@ -270,12 +279,14 @@ const Dashboard =(props)=>{
                     userPreference={userPreference} 
                     setUserPreference={setUserPreference}
                     setShowVisualization={setShowVisualization} 
-                    showVisualization={showVisualization}/>
+                    showVisualization={showVisualization}
+                    scrollToSection = {scrollToSection}/>
                 <Header deleteToken={props.deleteToken} username={username}/>
                 {showVisualization? <div className={classes.Graphs}><Visualization username={username}/></div> : 
                 <div>
                     <div>
                         <section className={classes.Posts}>
+                        
                          
                             {
                                 CardViews.length > 0? <GoogleMap longlat={latlogproperties}
@@ -299,14 +310,12 @@ const Dashboard =(props)=>{
                                          
                    </div> */}
                    <div className={classes.fixedheader1}>
-                       <div >
-                           <br/>
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong style={{color:'white'}}>Recommendations</strong> 
-                   </div>
+                       <div className="scrollHere">
+                       <br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <strong style={{color:'white'}}>Recommendations</strong> 
+                        </div>
                        </div>
-                     
-
-
 
 
                     <div >

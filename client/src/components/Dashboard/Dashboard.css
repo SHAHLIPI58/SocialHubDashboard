@@ -3,7 +3,7 @@
     flex-flow: row wrap;
     justify-content: center;
     width: 80%;
-    height: 440px;
+    height: 450px;
     margin: auto;
     float: right;
     overflow-y: scroll;
@@ -53,16 +53,18 @@
 
 
 .fixedheader1 {
-    width: 100%;
+    width: 84.9%;
     height: 50px;
     position: relative;        
     background: #333;
     padding: 0px 0;
     color: #fff;
+    
+    
    
 }
 .fixedheader1{
-    top: 540px;
+    top: 545px;
     left: 205px;
 }
 

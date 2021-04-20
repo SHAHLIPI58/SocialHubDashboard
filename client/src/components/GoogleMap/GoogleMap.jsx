@@ -34,12 +34,26 @@ const GoogleMap = (props) => {
                 lng={Number(ll.longitude)} 
                 name ={ll.b_name}
                 color="green"/>
+                
         
     })
 
 
+    
+  //   const recmarkers = props.longlat.map((ll,index) =>{
+  //     return <Marker 
+  //             key ={index}
+  //             lat = {Number(ll.latitude)}
+  //             lng={Number(ll.longitude)} 
+  //             name ={ll.b_name}
+  //             color="pink"/>
+              
+      
+  // })
+
+
     return (
-        <div style={{ height: '75vh', width: '95%' }}>
+        <div style={{ height: '78vh', width: '97%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyBn8Nd-y2xT2QFtkh8INau53gcZbT64x_k' }}
           defaultCenter={center}
@@ -54,6 +68,7 @@ const GoogleMap = (props) => {
           color="red"/>
           
           {markers}
+          {/* {recmarkers} */}
          
 
         </GoogleMapReact>

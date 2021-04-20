@@ -203,16 +203,15 @@ return (
                                 />
                             </label>
 
-                
-
-                <br/>
-                <p></p>
+                 <br/><br/>
                 <button type="submit">Filter</button>
                 
 
             </form>
             <br/>
             <button onClick={showVisualizationView}  style={{marginLeft:'20px'}}>Visualization</button>
+            <br/><br/>
+            <button onClick={props.scrollToSection}  style={{marginLeft:'20px'}}>Recommendation</button>
             </div>}
             
         </div>
