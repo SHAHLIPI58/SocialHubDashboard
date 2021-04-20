@@ -2,6 +2,15 @@ import React, { useEffect, useState }  from 'react';
 import classes from './SideNav.css'
 const SideNav = (props) => {
     const [preferences, setPreferences] = useState(props.userPreference);
+    
+
+    useEffect(()=> {
+        setPreferences({
+            ...preferences,
+            location: props.userPreference.location
+        })
+        // console.log("useEffect called in SideNav")
+    },[props.userPreference])
 
     const onPriceRadioChange = (e) => {
         setPreferences({
@@ -22,6 +31,14 @@ const SideNav = (props) => {
             ...preferences,
             radius: e.target.value 
         });
+    };
+    
+    const onCityTextChange = (e) => {
+        setPreferences({
+            ...preferences,
+            location: e.target.value 
+        });
+       
     };
 
 
@@ -165,7 +182,7 @@ return (
                             </div>
 
                 {/* Textbox for radius */}
-                <br/>
+            
                 <strong style={{color:'white'}}>Radius:</strong>
                             <label>
                                 <input
@@ -174,6 +191,20 @@ return (
                                     onChange={onRadiusTextChange}
                                 />
                             </label>
+                
+                <br/><br/>
+                <strong style={{color:'white'}}>City:&nbsp;  </strong>
+                            <label>
+                                <input
+                                    type="text"
+                                    value={preferences.location}
+                                    onChange={onCityTextChange}
+                                   
+                                />
+                            </label>
+
+                
+
                 <br/>
                 <p></p>
                 <button type="submit">Filter</button>

@@ -47,7 +47,7 @@ const Rating =(props)=>{
     //    return <p>entry</p>
     // })
 
-    return <div>
+    return <div style={{backgroundColor:'orange'}}>
         <p>{props.modalData.resName}</p>
         <p>{props.modalData.resImg}</p>
         <p>{props.modalData.price}</p>

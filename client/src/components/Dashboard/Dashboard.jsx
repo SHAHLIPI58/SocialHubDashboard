@@ -25,7 +25,9 @@ const Dashboard =(props)=>{
     const [userPreference, setUserPreference] = useState({
         price: "1",
         category: "bars",
-        radius: "40000"
+        radius: "40000",
+        location:undefined
+       
     });
 
     const [noResult, setNoResult] = useState(false);
@@ -91,7 +93,7 @@ const Dashboard =(props)=>{
         axios.post(
             'http://localhost:3001/search',
             {
-                location: location,
+                location: userPreference.location,
                 price: parseInt(userPreference.price),
                 categories:`${userPreference.category}`,
                 radius: parseInt(userPreference.radius)
@@ -164,6 +166,12 @@ const Dashboard =(props)=>{
 
         }
         
+        if(userPreference.location === undefined){
+            setUserPreference({
+                ...userPreference,
+                location: location
+            });
+        }
 
         if(location !== undefined){
             locationBasedSearch(location);
@@ -181,7 +189,7 @@ const Dashboard =(props)=>{
     //     console.log("Updated pref: ", userPreference);
     // }, [userPreference]);
 
-
+     console.log(userPreference)
     // console.log("length of locationBasedResults = ",locationBasedResults.length)
     console.log("locationBasedResults =",locationBasedResults)
     
@@ -243,7 +251,7 @@ const Dashboard =(props)=>{
                 <div>
                     <div>
                         <section className={classes.Posts}>
-                        
+                         
                             {
                                 CardViews.length > 0? <GoogleMap longlat={latlogproperties}
                                                                 userlongitude = {longitude}
@@ -257,7 +265,7 @@ const Dashboard =(props)=>{
                                 )
                             
                             }
-
+                          
                         </section>
                     </div>
                     {/* <div style={{width:'150%', height:'10px',position:'relative',background:'orange'}}>   
