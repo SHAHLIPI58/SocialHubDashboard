@@ -119,7 +119,7 @@ return (
                 </div>
 
                 {/* Radio options for categories */}
-                <br/>
+             
                 <strong style={{color:'white'}}>Categories:</strong>
                 <div className={classes.verticalradiobuttons}>
                 <fieldset className ={classes.fieldsetProperties}>
@@ -131,7 +131,7 @@ return (
                                     checked={preferences.category === "bars"}
                                     onChange={onCategoryRadioChange}
                                 />
-                                <span style={{color :'white'}}>bars</span>
+                                <span style={{color :'white'}}>Bars</span>
                             </label>
                             </span></div>
                             <div><span>
@@ -142,7 +142,7 @@ return (
                                     checked={preferences.category === "restaurants"}
                                     onChange={onCategoryRadioChange}
                                 />
-                                <span style={{color :'white'}}>restaurants</span>
+                                <span style={{color :'white'}}>Restaurants</span>
                             </label>
                             </span></div>
                             <div><span>
@@ -153,7 +153,7 @@ return (
                                     checked={preferences.category === "parks"}
                                     onChange={onCategoryRadioChange}
                                 />
-                                <span style={{color :'white'}}>parks</span>
+                                <span style={{color :'white'}}>Parks</span>
                             </label>
                             </span></div>
                             <div><span>
@@ -175,7 +175,7 @@ return (
                                     checked={preferences.category === "movietheaters"}
                                     onChange={onCategoryRadioChange}
                                 />
-                                <span style={{color :'white'}}>Cinema</span>
+                                <span style={{color :'white'}}>Movietheaters</span>
                             </label>
                             </span></div>
                           </fieldset>

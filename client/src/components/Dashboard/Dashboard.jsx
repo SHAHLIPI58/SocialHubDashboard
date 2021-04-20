@@ -93,7 +93,7 @@ const Dashboard =(props)=>{
         axios.post(
             'http://localhost:3001/search',
             {
-                location: userPreference.location,
+                location:userPreference.location,
                 price: parseInt(userPreference.price),
                 categories:`${userPreference.category}`,
                 radius: parseInt(userPreference.radius)
@@ -215,6 +215,8 @@ const Dashboard =(props)=>{
 
     // Set some custom styling for ReactModal component
     const customStyles = {
+
+        
         content : {
           top                   : '50%',
           left                  : '50%',
@@ -227,12 +229,35 @@ const Dashboard =(props)=>{
 
         }
       };
+
+    //   const style1={{
+    //     overlay: {
+    //       backgroundColor: 'papayawhip'
+    //     },
+    //     content: {
+    //       color: 'lightsteelblue'
+    //     }
+    //   }};
     
     return(<div>
                 <ReactModal 
                 isOpen={showModal}
                 contentLabel="Minimal Modal Example"
-                style={customStyles}
+                style={{
+                    overlay: {
+                      zIndex:'10'
+                    },
+                    content: {
+                        top                   : '50%',
+                        left                  : '50%',
+                        right                 : 'auto',
+                        bottom                : 'auto',
+                        marginRight           : '-50%',
+                        transform             : 'translate(-50%, -50%)',
+                        backgroundColor       : 'white'
+                   
+                    }
+                  }}
                 > 
                     <Rating modalData={modalData}
                             userPreferenceCategory = {`${userPreference.category}`}

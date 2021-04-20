@@ -4,6 +4,7 @@
     background: #333;
     padding: 0px 0;
     color: #fff;
+    z-index: 1;
 }
 .fixedheader{
     top: 0;

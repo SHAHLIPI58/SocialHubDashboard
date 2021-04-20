@@ -18,7 +18,7 @@ const { MongoClient1 } = require('mongodb');
 const url = 'mongodb://localhost:27017';
 
 // Database Name
-const dbName = 'testingMongo';
+const dbName = 'ratingMongo';
 const client = new MongoClient(url);
 
 
@@ -120,7 +120,7 @@ app.post('/search',(req,res)=>{
         Authorization: `Bearer ${bearerToken}` 
     },
     params: {location: location,
-             limit:20,
+             limit:9,
              categories: categories,
              radius: radius,
              price: price
@@ -148,7 +148,8 @@ app.post('/ratings',(req,res)=>{
      var itemid = req.body.itemid
      var itemname = req.body.itemname
      var rating = parseInt(req.body.rating)
-     var category = req.body.category
+     var category1 = req.body.category
+     var category = category1.charAt(0).toUpperCase()+category1.slice(1)
      var pricelevel = req.body.pricelevel
      var today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
      console.log(today)
@@ -202,7 +203,7 @@ var finalres ={}
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
      * See https://docs.mongodb.com/drivers/node/ for more details
      */
-    const uri = "mongodb://localhost:27017/testingMongo";
+    const uri = "mongodb://localhost:27017/ratingMongo";
 
     /**
      * The Mongo Client you will use to interact with your database
@@ -243,7 +244,7 @@ async function printCountByStart(client, username) {
     ];
 
     // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#aggregate for the aggregate() docs
-    const aggCursor = client.db("testingMongo").collection("documents").aggregate(pipeline);
+    const aggCursor = client.db("ratingMongo").collection("documents").aggregate(pipeline);
 
   
   
@@ -299,7 +300,7 @@ app.post('/getfindCountCategorySanalysisData',(req,res)=>{
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
      * See https://docs.mongodb.com/drivers/node/ for more details
      */
-    const uri = "mongodb://localhost:27017/testingMongo";
+    const uri = "mongodb://localhost:27017/ratingMongo";
 
     /**
      * The Mongo Client you will use to interact with your database
@@ -338,7 +339,7 @@ async function printCountByCategory(client, username) {
     ];
 
     // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#aggregate for the aggregate() docs
-    const aggCursor = client.db("testingMongo").collection("documents").aggregate(pipeline);
+    const aggCursor = client.db("ratingMongo").collection("documents").aggregate(pipeline);
 
   
   
@@ -370,7 +371,7 @@ app.post('/getfindCountPriceanalysisData',(req,res)=>{
  var finalres ={}
   async function main() {
   
-    const uri = "mongodb://localhost:27017/testingMongo";
+    const uri = "mongodb://localhost:27017/ratingMongo";
     const client = new MongoClient(uri);
 
     try {
@@ -403,7 +404,7 @@ async function printCountByPrice(client, username) {
     ];
 
     // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#aggregate for the aggregate() docs
-    const aggCursor = client.db("testingMongo").collection("documents").aggregate(pipeline);
+    const aggCursor = client.db("ratingMongo").collection("documents").aggregate(pipeline);
 
   
   
@@ -440,7 +441,7 @@ app.post('/getfindCountFavCatanalysisData',(req,res)=>{
 
  async function main() {
 
-   const uri = "mongodb://localhost:27017/testingMongo";
+   const uri = "mongodb://localhost:27017/ratingMongo";
 
  
    const client = new MongoClient(uri);
@@ -479,7 +480,7 @@ async function printCountByFavCategory(client, username) {
    ];
 
    // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#aggregate for the aggregate() docs
-   const aggCursor = client.db("testingMongo").collection("documents").aggregate(pipeline);
+   const aggCursor = client.db("ratingMongo").collection("documents").aggregate(pipeline);
 
  
  
@@ -505,7 +506,7 @@ async function printCountByFavCategory(client, username) {
 
 
 
-app.get('/testingmongo',(req,res)=>{
+app.get('/ratingMongo',(req,res)=>{
 
 
   async function main() {
@@ -513,7 +514,7 @@ app.get('/testingmongo',(req,res)=>{
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
      * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
      */
-    const uri = "mongodb://localhost:27017/testingMongo";
+    const uri = "mongodb://localhost:27017/ratingMongo";
 
     /**
      * The Mongo Client you will use to interact with your database
