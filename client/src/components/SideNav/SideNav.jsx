@@ -72,9 +72,38 @@ return (
 
         <div className={classes.sidenav}>
             
-            {props.showVisualization? <button onClick={hideVisualizationView}>Back to Recommendations</button>: <div><form onSubmit={onSubmit} style={{marginLeft:'20px'}}>
+            {props.showVisualization? <button onClick={hideVisualizationView}>Back to Search Places</button>: <div><form onSubmit={onSubmit} style={{marginLeft:'20px'}}>
+            {/* Drop Down options for price Level*/}
+            <strong style={{color:'white'}}>Price Levels:</strong>
+            <br/><br/>
+            <select name="pricelevel" id="pricelevel" onChange={onPriceRadioChange} >
+                    <option value="1" selected ={preferences.price === "1"}>$</option>
+                    <option value="2" selected ={preferences.price === "2"}>$$</option>
+                    <option value="3" selected ={preferences.price === "3"}>$$$</option>
+                    <option value="4" selected ={preferences.price === "4"}>$$$$</option>
+                   
+            </select>
+            <br/><br/>
+
+
+             {/* Drop Down options for Categories*/}
+             <strong style={{color:'white'}}>Categories:</strong>
+            <br/><br/>
+            <select name="categories" id="categories" onChange={onCategoryRadioChange} >
+                    <option value="bars" selected={preferences.category === "bars"}>Bars</option>
+                    <option value="restaurants" selected={preferences.category === "restaurants"}>Restaurants</option>
+                    <option value="parks" selected={preferences.category === "parks"}>Parks</option>
+                    <option value="bowling" selected={preferences.category === "bowling"}>Bowling</option>
+                    <option value="movietheaters" selected={preferences.category === "movietheaters"}>MovieTheaters</option>
+                   
+            </select>
+            <br/><br/>
+
+
+            
+
                 {/* Radio options for price */}
-                <strong style={{color:'white'}}>Price Level:</strong>
+                {/* <strong style={{color:'white'}}>Price Level:</strong>
                 <div className={classes.verticalradiobuttons}>
                 <fieldset className ={classes.fieldsetProperties}>
                        <div><span>
@@ -126,11 +155,11 @@ return (
                             </label>
                             </span></div>
                 </fieldset>
-                </div>
+                </div> */}
 
                 {/* Radio options for categories */}
              
-                <strong style={{color:'white'}}>Categories:</strong>
+                {/* <strong style={{color:'white'}}>Categories:</strong>
                 <div className={classes.verticalradiobuttons}>
                 <fieldset className ={classes.fieldsetProperties}>
                            <div><span>
@@ -189,7 +218,7 @@ return (
                             </label>
                             </span></div>
                           </fieldset>
-                            </div>
+                            </div> */}
 
                 {/* Textbox for radius */}
             

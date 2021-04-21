@@ -57,7 +57,7 @@ const Rating =(props)=>{
         <p>{props.modalData.display_address.toString()}</p>
         {/* <p>{address}</p> */}
         {/* <input type = "text" placeholder="provide rating here" ></input> */}
-        <select name="cars" id="cars" onChange={e => setRating(e.target.value)}>
+        <select name="stars" id="stars" onChange={e => setRating(e.target.value)}>
             <option value="1" >1 Star</option>
             <option value="2">2 Star</option>
             <option value="3">3 Star</option>
