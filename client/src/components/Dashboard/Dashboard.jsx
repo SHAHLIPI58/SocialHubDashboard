@@ -27,7 +27,8 @@ const Dashboard =(props)=>{
         price: "1",
         category: "bars",
         radius: "40000",
-        location:undefined
+        location:undefined,
+        term:""
        
     });
 
@@ -105,7 +106,8 @@ const Dashboard =(props)=>{
                 location:userPreference.location,
                 price: parseInt(userPreference.price),
                 categories:`${userPreference.category}`,
-                radius: parseInt(userPreference.radius)
+                radius: parseInt(userPreference.radius),
+                term:userPreference.term
             },
           ).then(response => {
               console.log("api call returned: ", response.data);

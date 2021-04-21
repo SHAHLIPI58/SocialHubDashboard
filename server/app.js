@@ -109,6 +109,7 @@ app.post('/search',(req,res)=>{
   var categories = req.body.categories;
   var radius =  req.body.radius;
   var price = req.body.price;
+  var term = req.body.term;
 
   console.log(radius);
   console.log(categories);
@@ -120,10 +121,18 @@ app.post('/search',(req,res)=>{
         Authorization: `Bearer ${bearerToken}` 
     },
     params: {location: location,
-             limit:9,
+             limit:18,
              categories: categories,
              radius: radius,
-             price: price
+             price: price,
+             term:term
+             //location: Chicago,60616
+             //terms for restaurant : "Chinese Kitchen","indian","italian food","american food"
+            //  term:"cake","chipotle","pizza" 
+            
+            //location: McKinney,75070
+            //term for resaurant: "thai food"
+            
             }
   };
 

@@ -7,7 +7,8 @@ const SideNav = (props) => {
     useEffect(()=> {
         setPreferences({
             ...preferences,
-            location: props.userPreference.location
+            location: props.userPreference.location,
+            term : props.userPreference.term
         })
         // console.log("useEffect called in SideNav")
     },[props.userPreference])
@@ -37,6 +38,15 @@ const SideNav = (props) => {
         setPreferences({
             ...preferences,
             location: e.target.value 
+        });
+       
+    };
+
+
+    const onTermTextChange = (e) => {
+        setPreferences({
+            ...preferences,
+            term: e.target.value 
         });
        
     };
@@ -199,6 +209,18 @@ return (
                                     type="text"
                                     value={preferences.location}
                                     onChange={onCityTextChange}
+                                   
+                                />
+                            </label>
+
+                 <br/><br/>
+
+                 <strong style={{color:'white'}}>Term Finder:&nbsp;  </strong>
+                            <label>
+                                <input
+                                    type="text"
+                                    value={preferences.term}
+                                    onChange={onTermTextChange}
                                    
                                 />
                             </label>
