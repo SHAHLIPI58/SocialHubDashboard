@@ -64,3 +64,23 @@
     margin: 5px 0 10px 0;
     width: 100%;
 }
+
+
+.fixedheader2 {
+    width: 123%;
+    height: 50px;
+    position: relative;        
+    background: #333;
+    padding: 0px 0;
+    color: #fff;
+    
+    
+   
+}
+.fixedheader2{
+    top: 10px;
+    left: 15px;
+}
+
+
+

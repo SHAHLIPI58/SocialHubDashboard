@@ -26,7 +26,7 @@ const Dashboard =(props)=>{
     const [userPreference, setUserPreference] = useState({
         price: "1",
         category: "bars",
-        radius: "40000",
+        radius: "20",
         location:undefined,
         term:""
        
@@ -74,6 +74,9 @@ const Dashboard =(props)=>{
           smooth: "easeInOutQuart",
         });
       };
+
+
+      
     
     
 

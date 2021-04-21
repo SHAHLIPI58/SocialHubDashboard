@@ -14,6 +14,8 @@ import PieChartCategoryCount from './PieChartCategoryCount'
 import BarChartStartCount from './BarChartStartCount'
 import BarChartPriceCount from './BarChartPriceCount'
 import PieChartFavCategoryCount from './PieChartFavCategoryCount'
+import RatingHistory from './RatingHistory'
+
 
 
 const Visualization =(props)=>{
@@ -21,9 +23,12 @@ const Visualization =(props)=>{
     // needed username as a prop for getting mongodb query for piechart, barchart component from node js query
     // this is dumb component.. just passing userid to <piechart> and <barchart> component as a props coming from dashboard component
 
-    const data1 = [{ label: 'Apples', value: 10 }, { label: 'Oranges', value: 20 },{ label: 'Pineaaple', value: 20 }];
-    const data = [{"label":"3star","value":1},{"label":"4star","value":4},{"label":"5star","value":4},{"label":"3star","value":2},{"label":"4star","value":3}]
+    // const data1 = [{ label: 'Apples', value: 10 }, { label: 'Oranges', value: 20 },{ label: 'Pineaaple', value: 20 }];
+    // const data = [{"label":"3star","value":1},{"label":"4star","value":4},{"label":"5star","value":4},{"label":"3star","value":2},{"label":"4star","value":3}]
     console.log("Visulization.............username props", props.username)
+
+
+
     return(<div>
 
             <div className = {classes.svgContainer}>
@@ -53,6 +58,22 @@ const Visualization =(props)=>{
                 <PieChartFavCategoryCount username={props.username} />
             </div>
 
+
+            <div className={classes.fixedheader2}>
+                       <div className="scrollHere2">
+                       <br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <strong style={{color:'white'}}>Rating History</strong> 
+                        </div>
+            </div>
+
+
+            <div className = {classes.svgContainer}>
+            <br></br>
+            <br/>
+                <RatingHistory username={props.username}/>
+            </div>
+
             
 
           
@@ -76,11 +97,7 @@ const Visualization =(props)=>{
             <BarChart chartId="barchartid4"/>
             <BarChart chartId="barchartid1"/> */}
             
-            
-        
-      
-        
-        
+
        
     </div>)
 }

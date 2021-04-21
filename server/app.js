@@ -107,7 +107,7 @@ app.use('/signup', (req, res) => {
 app.post('/search',(req,res)=>{
   var location = req.body.location;
   var categories = req.body.categories;
-  var radius =  req.body.radius;
+  var radius =  req.body.radius * 1609;
   var price = req.body.price;
   var term = req.body.term;
 
@@ -248,7 +248,7 @@ async function printCountByStart(client, username) {
     const pipeline = [
       { '$match': { username: username} },
       { '$group': { '_id': "$rating", 'count': { '$sum': 1 } } },
-      { '$sort' :{rating:1}}
+      { '$sort' :{_id:1}}
      
     ];
 
@@ -409,6 +409,7 @@ async function printCountByPrice(client, username) {
     const pipeline = [
       { '$match': { username: username} },
       { '$group': { '_id': "$pricelevel", 'count': { '$sum': 1 } } },
+      { '$sort' :{_id:1}}
      
     ];
 
@@ -513,6 +514,29 @@ async function printCountByFavCategory(client, username) {
 
 })
 
+
+
+app.post('/ratingHistory',(req,res)=>{
+  var username = req.body.username
+  
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("ratingMongo");
+    /*Return only the documents with the address "Park Lane 38":*/
+    var query = { username:username};
+    var sort = {Date:-1,_id:-1};
+    dbo.collection("documents").find(query).sort(sort).toArray(function(err, result) {
+      if (err) throw err;
+      console.log(result);
+      res.send(result)
+      
+      db.close();
+    });
+  });
+  
+
+
+})
 
 
 app.get('/ratingMongo',(req,res)=>{
