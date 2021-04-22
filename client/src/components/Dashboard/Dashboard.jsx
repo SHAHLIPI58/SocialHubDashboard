@@ -113,7 +113,7 @@ const Dashboard =(props)=>{
                 term:userPreference.term
             },
           ).then(response => {
-              console.log("api call returned: ", response.data);
+              console.log("api call returned locationBasedSearch: ", response.data);
               filterLocationBasedSearch(response.data);
               
           })
@@ -252,7 +252,7 @@ const Dashboard =(props)=>{
     //       color: 'lightsteelblue'
     //     }
     //   }};
-    
+    console.log("modalData.......",modalData)
     return(<div>
                 <ReactModal 
                 isOpen={showModal}

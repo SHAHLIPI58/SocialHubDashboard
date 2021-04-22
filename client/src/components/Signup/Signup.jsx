@@ -153,7 +153,7 @@ const Signup =(props)=> {
                     {error ?<div className={classes.invalidcredential}>User Already Exist!</div>:null}
                     <button type="submit" className={classes.btn} disabled={!validateForm()}>SignUp</button>
 
-                    <button type="submit" className={classes.btn2} 
+                    <button type="button" className={classes.btn2} 
                                            onClick={event => {setError(false); window.location.href='/Login'}}>LogIn</button> 
                     
                     </div> 

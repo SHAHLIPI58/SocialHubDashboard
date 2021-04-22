@@ -83,7 +83,7 @@ const LoginPub =(props)=> {
                     
                     <input type="password"  placeholder="Password"  className={classes.email}
                                             onChange={e => setPassword(e.target.value)}/>
-                    {error ?<div className={classes.invalidcredential}>Invalid credentials</div>:null}
+                    {error ?<div className={classes.invalidcredential}>Invalid credentials ........</div>:null}
                     <button type="submit" className={classes.btn} disabled={!validateForm()}>LogIn</button>
 
                     <button type="button" className={classes.btn2} onClick={event => {   window.location.href='/Signup'}}>SignUp</button> 

@@ -150,6 +150,41 @@ app.post('/search',(req,res)=>{
 
 })
 
+
+// Different API Calls otherUsersReviews
+app.post('/otherUsersReviews',(req,res)=>{
+  let bussinessId = req.body.resId
+  console.log("bussinessId :otherUsersReviews",bussinessId)
+
+  const bearerToken = "eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
+  const config = {
+    headers: {
+        Authorization: `Bearer ${bearerToken}` 
+    },
+    params: {locale :'en_US'
+             //location: Chicago,60616
+             //terms for restaurant : "Chinese Kitchen","indian","italian food","american food"
+            //  term:"cake","chipotle","pizza" 
+            
+            //location: McKinney,75070
+            //term for resaurant: "thai food"
+            
+            }
+  };
+
+  axios.get('https://api.yelp.com/v3/businesses/'+`${bussinessId}`+'/reviews',
+    config
+  ).then(response => {
+      console.log("api call returned otherusers Reviews: ", response.data);
+      res.send(response.data.reviews);
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).send(error);
+  });
+
+})
+
 app.post('/ratings',(req,res)=>{
      
   

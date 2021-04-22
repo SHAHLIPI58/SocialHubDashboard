@@ -42,6 +42,19 @@ const Rating =(props)=>{
     console.log(props.userPreferenceCategory)
     console.log(props.username)
     console.log(rating)
+    console.log("rating modal...",props.modalData.usersReviews)
+
+    const UsersRatingsViews = props.modalData.usersReviews.map(URViewRes=>{
+        return (
+
+                <div key ={URViewRes.id}>
+                
+                    <p>{URViewRes.rating}</p>
+                    <p>{URViewRes.text}</p>
+                </div>
+                      
+                )
+    });
     // const address = props.modalData.display_address.forEach((entry)=>{
     //    console.log(entry)
     //    return <p>entry</p>
@@ -49,12 +62,14 @@ const Rating =(props)=>{
 
     return <div style={{backgroundColor:'orange'}}>
         <p>{props.modalData.resName}</p>
-        <p>{props.modalData.resImg}</p>
+        {/* <p>{props.modalData.resImg}</p> */}
         <p>{props.modalData.price}</p>
         <p>{props.modalData.rating}</p>
         <p>{props.modalData.review_count}</p>
         <p>{props.modalData.phone}</p>
         <p>{props.modalData.display_address.toString()}</p>
+        {/* <p>{props.modalData.dummyId}</p> */}
+        {UsersRatingsViews}
         {/* <p>{address}</p> */}
         {/* <input type = "text" placeholder="provide rating here" ></input> */}
         <select name="stars" id="stars" onChange={e => setRating(e.target.value)}>
