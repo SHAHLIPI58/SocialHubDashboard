@@ -1,15 +1,13 @@
 import React, { useState }  from 'react';
-import classes from './Login.css';
+import classes from './LoginPub.css';
 import PropTypes from 'prop-types';
-//import 'bootstrap/dist/css/bootstrap.min.css';
-
 import SideNavPub from '../SideNav/SideNavPub'
 import HeaderPub from '../Header/HeaderPub'
 
 
 
 
-const Login =(props)=> {
+const LoginPub =(props)=> {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
@@ -53,51 +51,47 @@ const Login =(props)=> {
     }
 
     return(
-      
-        <div className={classes.loginwrapper}>
+        <div>
              <HeaderPub/>
             <SideNavPub/>
-        {/* <h1>Please Log In</h1>
-          <form onSubmit={handleSubmit}> 
-            <label>
-                <p>Username</p>
-                <input type="text" onChange={e => setUserName(e.target.value)}/> */}
-                {/* <div className ={classes.divCheckbox} >Empty username</div> */}
-            {/* </label>
-            <label>
-                <p>Password</p>
-                <input type="password" onChange={e => setPassword(e.target.value)}/>
-            </label>
-            <div>
-                <button type="submit" disabled={!validateForm()}>Submit</button>
-                <button type="button" onClick={event =>  window.location.href='/Signup'}>signup</button>
-            </div>
-            {error ? <div>Invalid credentials</div> : null}
-            </form> */}
+           
+            <div className={classes.loginpubwrapper}>
+            {/* <h1>Please Log In</h1>
+            <form onSubmit={handleSubmit}> 
+                <label>
+                    <p>Username</p>
+                    <input type="text" onChange={e => setUserName(e.target.value)}/> */}
+                    {/* <div className ={classes.divCheckbox} >Empty username</div> */}
+                {/* </label>
+                <label>
+                    <p>Password</p>
+                    <input type="password" onChange={e => setPassword(e.target.value)}/>
+                </label>
+                <div>
+                    <button type="submit" disabled={!validateForm()}>Submit</button>
+                    <button type="button" onClick={event =>  window.location.href='/Signup'}>signup</button>
+                </div>
+                {error ? <div>Invalid credentials</div> : null}
+                </form> */}
 
-
-
-            <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div className={classes.box}>
                     <h1 className={classes.h1}>Please Login</h1>
 
                     <input type="text"  placeholder="Username"  className={classes.email} 
                                         onChange={e => setUserName(e.target.value)}/>
                     
-                    
                     <input type="password"  placeholder="Password"  className={classes.email}
                                             onChange={e => setPassword(e.target.value)}/>
-                    
-                    
-
                     {error ?<div className={classes.invalidcredential}>Invalid credentials</div>:null}
                     <button type="submit" className={classes.btn} disabled={!validateForm()}>LogIn</button>
 
-                    <button type="button" className={classes.btn2} onClick={event => {setError(false); window.location.href='/Signup'}}>SignUp</button> 
+                    <button type="button" className={classes.btn2} onClick={event => {   window.location.href='/Signup'}}>SignUp</button> 
                     
                     </div> 
                 
                 </form>
+            </div>
         </div>
             
     )
@@ -107,4 +101,4 @@ const Login =(props)=> {
 //     setToken: PropTypes.func.isRequired
 //   }
 
-export default Login;
+export default LoginPub;

@@ -6,11 +6,12 @@ import  { useState } from 'react';
 import Box from "./components/Box/Box"
 import Dashboard from './components/Dashboard/Dashboard'
 import Preferences from './components/Preferences/Preferences'
-import Login from './components/Login/Login'
+import Login from './components/Login/LoginPub'
 import Signup from './components/Signup/Signup'
 import BarChartComponent from './components/D3Charts/BarChartComponent'
 import BarChart from'./components/D3Charts/BarChart'
 import PieChart from './components/D3Charts/PieChart'
+import LoginPub from './components/Login/LoginPub'
 
 
 

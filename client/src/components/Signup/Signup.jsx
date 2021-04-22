@@ -2,7 +2,8 @@ import React, { useEffect, useState }  from 'react';
 import classes from './Signup.css';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-
+import SideNavPub from '../SideNav/SideNavPub'
+import HeaderPub from '../Header/HeaderPub'
 
 
 
@@ -104,13 +105,16 @@ const Signup =(props)=> {
 
     return(
         <div className={classes.signupwrapper}>
-        <h1>Please SignUp</h1>
+
+            <HeaderPub/>
+            <SideNavPub/>
+        {/* <h1>Please SignUp</h1>
         <form onSubmit={handleSubmit}> 
             <label>
                 <p>Username</p>
-                <input type="text" onChange={e => setUserName(e.target.value)}/>
+                <input type="text" onChange={e => setUserName(e.target.value)}/> */}
                 {/* <div className ={classes.divCheckbox} >Empty username</div> */}
-            </label>
+            {/* </label>
             <label>
                 <p>Password</p>
                 <input type="password" onChange={e => setPassword(e.target.value)}/>
@@ -126,7 +130,37 @@ const Signup =(props)=> {
             </div>
             {error ? <div>User Already Exist!</div> : null}
             {message !==""? <div>Profile Created Successfully. Please Login!</div>:null}
-            </form>
+            </form> */}
+
+            <form onSubmit={handleSubmit}>
+                    <div className={classes.box}>
+                    <h1 className={classes.h1}>Please SignUp</h1>
+
+                    <input type="text"  placeholder="Username"  className={classes.email} 
+                                        onChange={e => setUserName(e.target.value)}/>
+                    
+                    <input type="text"  placeholder="Email-Id"  className={classes.email} 
+                                        />
+                    
+                    <input type="password"  placeholder="Password"  className={classes.email} 
+                                            onChange={e => setPassword(e.target.value)}/>
+
+                    <input type="password"  placeholder="ReEnter Password"  className={classes.email}
+                                           />
+
+                    <input id="locationInput" type="text"  className={classes.email} />
+
+                    {error ?<div className={classes.invalidcredential}>User Already Exist!</div>:null}
+                    <button type="submit" className={classes.btn} disabled={!validateForm()}>SignUp</button>
+
+                    <button type="submit" className={classes.btn2} 
+                                           onClick={event => {setError(false); window.location.href='/Login'}}>LogIn</button> 
+                    
+                    </div> 
+                
+              </form>
+
+
         </div>
             
     )
