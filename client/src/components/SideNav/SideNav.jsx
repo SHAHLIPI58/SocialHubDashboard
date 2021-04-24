@@ -73,7 +73,7 @@ return (
         <div className={classes.sidenav}>
             
             {props.showVisualization? <div><button onClick={hideVisualizationView}>Back to Search Places</button> <br/><br/>
-            <button onClick={{}}>User Rating History</button></div>: <div><form onSubmit={onSubmit} style={{marginLeft:'20px'}}>
+            <button className={classes.btn} onClick={{}}>User Rating History</button></div>: <div><form onSubmit={onSubmit} style={{marginLeft:'20px'}}>
             {/* Drop Down options for price Level*/}
             <strong style={{color:'white'}}>Price Levels:</strong>
             <br/><br/>
@@ -261,9 +261,9 @@ return (
 
             </form>
             <br/>
-            <button onClick={showVisualizationView}  style={{marginLeft:'20px'}}>Visualization</button>
+            <button className={classes.btn} onClick={showVisualizationView}  style={{marginLeft:'20px'}}>Visualization</button>
             <br/><br/>
-            <button onClick={props.scrollToSection}  style={{marginLeft:'20px'}}>Recommendation</button>
+            <button className={classes.btn} onClick={props.scrollToSection}  style={{marginLeft:'20px'}}>Recommendation</button>
             </div>}
             
         </div>

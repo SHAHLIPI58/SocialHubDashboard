@@ -47,10 +47,10 @@ const Rating =(props)=>{
     const UsersRatingsViews = props.modalData.usersReviews.map(URViewRes=>{
         return (
 
-                <div key ={URViewRes.id}>
                 
-                    <p>{URViewRes.rating}</p>
-                    <p>{URViewRes.text}</p>
+                <div key ={URViewRes.id} className={classes.ratingModalDetail} style={{backgroundColor:"#C7CDE5"}}>
+                    <p>{URViewRes.rating} Star : {URViewRes.text}</p>
+                    {/* <p></p> */}
                 </div>
                       
                 )
@@ -60,18 +60,25 @@ const Rating =(props)=>{
     //    return <p>entry</p>
     // })
 
-    return <div style={{backgroundColor:'orange'}}>
-        <p>{props.modalData.resName}</p>
-        {/* <p>{props.modalData.resImg}</p> */}
-        <p>{props.modalData.price}</p>
-        <p>{props.modalData.rating}</p>
-        <p>{props.modalData.review_count}</p>
-        <p>{props.modalData.phone}</p>
-        <p>{props.modalData.display_address.toString()}</p>
+    return <div className={classes.boxRatingModal} style={{backgroundColor:'white'}} >
+        <div className={classes.ratingModalDetail}>
+            <p >{props.modalData.resName}</p>
+            {/* <p>{props.modalData.resImg}</p> */}
+            <p >Price Level : {props.modalData.price} 
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;RatingCounts : {props.modalData.review_count}
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Avg. Rating :{props.modalData.rating} </p>
+            {/* <p className={classes.ratingModalDetail}></p> */}
+            {/* <p className={classes.ratingModalDetail}></p> */}
+            <p >{props.modalData.phone}</p>
+            <p >{props.modalData.display_address.toString()}</p>
+        </div>
+       
         {/* <p>{props.modalData.dummyId}</p> */}
         {UsersRatingsViews}
         {/* <p>{address}</p> */}
         {/* <input type = "text" placeholder="provide rating here" ></input> */}
+        <div className={classes.ratingModalDetail}>
+        Provide Rating : &nbsp;
         <select name="stars" id="stars" onChange={e => setRating(e.target.value)}>
             <option value="1" >1 Star</option>
             <option value="2">2 Star</option>
@@ -80,9 +87,10 @@ const Rating =(props)=>{
             <option value="5" selected>5 Star</option>
         </select>
         <br></br>
-        
-        <button onClick={saveRating}>Submit</button>
-        <button onClick={props.handleCloseModal}>Close Modal</button>
+        <br></br>
+        <button onClick={saveRating}>Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button onClick={props.handleCloseModal}>Close</button>
+        </div>
     </div>
 }
 

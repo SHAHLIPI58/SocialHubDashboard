@@ -287,6 +287,7 @@ const Dashboard =(props)=>{
                     showVisualization={showVisualization}
                     scrollToSection = {scrollToSection}/>
                 <Header deleteToken={props.deleteToken} username={username}/>
+                
                 {showVisualization? <div className={classes.Graphs}><Visualization username={username}/></div> : 
                 <div>
                     <div>

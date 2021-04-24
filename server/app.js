@@ -110,6 +110,7 @@ app.post('/search',(req,res)=>{
   var radius =  req.body.radius * 1609;
   var price = req.body.price;
   var term = req.body.term;
+  var open_at = Math.floor(Date.now()/1000)
 
   console.log(radius);
   console.log(categories);
@@ -125,7 +126,8 @@ app.post('/search',(req,res)=>{
              categories: categories,
              radius: radius,
              price: price,
-             term:term
+             term:term,
+             open_at:open_at
              //location: Chicago,60616
              //terms for restaurant : "Chinese Kitchen","indian","italian food","american food"
             //  term:"cake","chipotle","pizza" 
