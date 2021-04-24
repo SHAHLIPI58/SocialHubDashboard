@@ -116,7 +116,7 @@ app.post('/search',(req,res)=>{
   console.log(categories);
   console.log(price);
 
-  const bearerToken = "eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
+  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
   const config = {
     headers: {
         Authorization: `Bearer ${bearerToken}` 
@@ -158,7 +158,7 @@ app.post('/otherUsersReviews',(req,res)=>{
   let bussinessId = req.body.resId
   console.log("bussinessId :otherUsersReviews",bussinessId)
 
-  const bearerToken = "eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
+  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
   const config = {
     headers: {
         Authorization: `Bearer ${bearerToken}` 

@@ -61,13 +61,17 @@ const GoogleMap = (props) => {
           options={getMapOptions}
         >
 
-        <Marker 
+        
+          
+          {markers}
+
+          <Marker 
           lat = {center.lat}
           lng={center.lng} 
           name ="You are here!"
-          color="red"/>
+          color="red"/> 
+
           
-          {markers}
           {/* {recmarkers} */}
          
 

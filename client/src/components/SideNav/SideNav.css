@@ -70,3 +70,45 @@
   .btn:hover:enabled{
     background:green; 
   }
+
+
+  .wgtmsr{
+    width:168px;   
+    /* text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center; */
+   }
+
+   .wgtmsr option{
+    width:168px; 
+    /* text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center; */
+  }
+
+
+
+  .btnfilter{
+    background:#3498db;
+    width:135px;
+    padding-top:5px;
+    padding-bottom:5px;
+    color:white;
+    border-radius:4px;
+    border: #2980b9 1px solid;
+    
+    /* margin-top:20px; */
+    /* margin-bottom:20px; */
+    float:left;
+    /* margin-left:16px; */
+    font-weight:800;
+    font-size:0.8em;
+  }
+  
+  .btnfilter:hover:enabled{
+    background:#105583; 
+  }
+
+
+
+ 

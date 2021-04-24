@@ -15,3 +15,26 @@
 }
 
 
+
+.btnLogout{
+    background:#dd3e3e;
+    width:100px;
+    padding-top:5px;
+    padding-bottom:5px;
+    color:white;
+    border-radius:4px;
+    border: #aa1d28 1px solid;
+    text-align: center;
+    /* margin-top:20px;
+    margin-bottom:20px; */
+    /* float:left; */
+    /* margin-left:100px; */
+    font-weight:800;
+    font-size:0.8em;
+  }
+  
+  .btnLogout:hover:enabled{
+    background:#CD0000; 
+  }
+
+

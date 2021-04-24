@@ -75,9 +75,9 @@ return (
             {props.showVisualization? <div><button onClick={hideVisualizationView}>Back to Search Places</button> <br/><br/>
             <button className={classes.btn} onClick={{}}>User Rating History</button></div>: <div><form onSubmit={onSubmit} style={{marginLeft:'20px'}}>
             {/* Drop Down options for price Level*/}
-            <strong style={{color:'white'}}>Price Levels:</strong>
-            <br/><br/>
-            <select name="pricelevel" id="pricelevel" onChange={onPriceRadioChange} >
+            <strong style={{color:'white'}} >Price Levels:</strong>
+       
+            <select name="pricelevel" id="pricelevel" onChange={onPriceRadioChange} className={classes.wgtmsr}>
                     <option value="1" selected ={preferences.price === "1"}>$</option>
                     <option value="2" selected ={preferences.price === "2"}>$$</option>
                     <option value="3" selected ={preferences.price === "3"}>$$$</option>
@@ -89,8 +89,8 @@ return (
 
              {/* Drop Down options for Categories*/}
              <strong style={{color:'white'}}>Categories:</strong>
-            <br/><br/>
-            <select name="categories" id="categories" onChange={onCategoryRadioChange} >
+         
+            <select name="categories" id="categories" onChange={onCategoryRadioChange} className={classes.wgtmsr} >
                     <option value="bars" selected={preferences.category === "bars"}>Bars</option>
                     <option value="restaurants" selected={preferences.category === "restaurants"}>Restaurants</option>
                     <option value="parks" selected={preferences.category === "parks"}>Parks</option>
@@ -256,14 +256,14 @@ return (
                             </label>
 
                  <br/><br/>
-                <button type="submit">Filter</button>
+                <button type="submit" className={classes.btnfilter}  style={{marginLeft:'0px'}} >Filter</button>
                 
 
             </form>
             <br/>
-            <button className={classes.btn} onClick={showVisualizationView}  style={{marginLeft:'20px'}}>Visualization</button>
+            <button className={classes.btn} onClick={showVisualizationView}  style={{marginLeft:'20px',marginTop:'10px'}}>Visualization</button>
             <br/><br/>
-            <button className={classes.btn} onClick={props.scrollToSection}  style={{marginLeft:'20px'}}>Recommendation</button>
+            <button className={classes.btn} onClick={props.scrollToSection}  style={{marginLeft:'20px',marginTop:'10px'}}>Recommendation</button>
             </div>}
             
         </div>

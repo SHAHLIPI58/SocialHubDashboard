@@ -65,7 +65,7 @@ const Rating =(props)=>{
             <p >{props.modalData.resName}</p>
             {/* <p>{props.modalData.resImg}</p> */}
             <p >Price Level : {props.modalData.price} 
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;RatingCounts : {props.modalData.review_count}
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Review Counts : {props.modalData.review_count}
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Avg. Rating :{props.modalData.rating} </p>
             {/* <p className={classes.ratingModalDetail}></p> */}
             {/* <p className={classes.ratingModalDetail}></p> */}
@@ -88,8 +88,8 @@ const Rating =(props)=>{
         </select>
         <br></br>
         <br></br>
-        <button onClick={saveRating}>Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button onClick={props.handleCloseModal}>Close</button>
+        <button onClick={saveRating} className={classes.btnRating}>Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button onClick={props.handleCloseModal} className={classes.btnClose}>Close</button>
         </div>
     </div>
 }
