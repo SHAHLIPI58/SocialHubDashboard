@@ -21,6 +21,11 @@ const url = 'mongodb://localhost:27017';
 const dbName = 'ratingMongo';
 const client = new MongoClient(url);
 
+//Recombee
+var recombee = require('recombee-api-client');
+var rqs = recombee.requests;
+var clientRecombee = new recombee.ApiClient('placerec-dev', 'DEJsyJUwbrXVEePuRyEQmfAayorajE6ELWUSU3xIpr1rXuELPQfilPpkTytBANQA');
+
 
 // use it before all route definitions
 app.use(cors({origin: 'http://localhost:3000'}));
@@ -91,16 +96,40 @@ app.use('/signup', (req, res) => {
                       var q = connection.query('insert into `user` set ?', post, function (error, results, fields) {
                         if(error) throw error;
                       })
-                      //console.log(q.sql)
-                      // res.send({
-                      //   message: 'success'
-                      // }); 
+                     //recombee comes here after new user creates
+                     
+                     recombeeUserInfo ={}
+                     recombeeUserInfo.username = uname
+                     recombeeUserInfo.location = lct
+                     recombeeUserInfo.longitude = long
+                     recombeeUserInfo.latitude = lat
+
+
+                     clientRecombee.send(new rqs.SetUserValues(uname, recombeeUserInfo, {
+                      // optional parameters:
+                      'cascadeCreate': true
+                    }));
+
+
                       res.status(201).send("created new user");
 
                     }
                     
                   });
   //res.status(401).send("Unauthorized..");
+})
+
+
+app.get('/testRecombee',(req,res)=>{
+
+  //  recombeeUserInfo ={}
+  //  recombeeUserInfo.username = "uname"
+  //  recombeeUserInfo.location = "lct"
+  //  recombeeUserInfo.longitude = "long"
+  //  recombeeUserInfo.latitude = "lat"
+
+  //  console.log(recombeeUserInfo)
+
 })
 
 // Different API Calls Here
@@ -116,7 +145,8 @@ app.post('/search',(req,res)=>{
   console.log(categories);
   console.log(price);
 
-  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  const bearerToken1 = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  const bearerToken="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {
         Authorization: `Bearer ${bearerToken}` 
@@ -158,7 +188,8 @@ app.post('/otherUsersReviews',(req,res)=>{
   let bussinessId = req.body.resId
   console.log("bussinessId :otherUsersReviews",bussinessId)
 
-  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  const bearerToken1 = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  const bearerToken="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {
         Authorization: `Bearer ${bearerToken}` 
@@ -222,6 +253,34 @@ app.post('/ratings',(req,res)=>{
 
       const db = client.db(dbName);
       insertDocuments(db, function() {
+        //in callback provide PurchaseView and RatingView of Recombee
+        var dateobj = new Date();
+        var isoDate = dateobj.toISOString();
+      //   clientRecombee.send(new rqs.AddPurchase(username,itemid, {timestamp: isoDate, cascadeCreate: true}),
+      //   (err, response) => {
+      //     //response.send("AddPurchase added ..")
+      //   }
+      // );
+
+      clientRecombee.send(new rqs.AddPurchase(username,itemid, {timestamp: isoDate, cascadeCreate: true}),
+          (err, response) => {
+            //response.send("AddPurchase added ..")
+            var recombeeRating = (rating - 3) / 2
+            clientRecombee.send(new rqs.AddRating(username,itemid,recombeeRating, {timestamp: isoDate, cascadeCreate: true}),
+            (err, response) => {
+              //response.send("AddRating added ..")
+                }
+            );
+          }
+      );
+
+
+    // clientRecombee.send(new rqs.AddRating(username,itemid,rating, {timestamp: isoDate, cascadeCreate: true}),
+    //     (err, response) => {
+    //       //response.send("AddRating added ..")
+    //     }
+    // );
+
       // client.close();
       })
 
@@ -232,7 +291,60 @@ app.post('/ratings',(req,res)=>{
 
 
 
+app.post('/recombeeAddDetailView',(req,res)=>{
+  var itemId = req.body.itemid
+  var username = req.body.username
+  var dateobj = new Date();
+  var isoDate = dateobj.toISOString();
+  clientRecombee.send(new rqs.AddDetailView(username,itemId, {timestamp: isoDate, cascadeCreate: true}),
+    (err, response) => {
+      //response.send("recombeeAddDetailView added ..")
+    }
+);
 
+console.log("itemId....",itemId)
+console.log("username....",username)
+console.log("isoDate....",isoDate)
+  
+})
+
+
+app.post('/recombeeRecommendation',(req,res)=>{
+  var username = req.body.username
+  var term = req.body.term
+  var mainterm = req.body.mainterm
+  var price = req.body.price
+
+  var pricelevel =""
+  if(price === "1"){
+    pricelevel ="$"
+  }else if(price == "2"){
+    pricelevel ="$$"
+  }else if(price == "3"){
+    pricelevel ="$$$"
+  }else if(price == "4"){
+    pricelevel ="$$$$"
+  }
+  
+  var lat = req.body.lat
+  var longitude = req.body.longitude
+  var miles = req.body.miles * 1609
+  //new rqs.RecommendItemsToUser(username, 5,{'returnProperties': true, 'filter':'earth_distance(41.8483,-87.6291,41.8483,-87.6291) < 20 * 1609'})
+  //{returnProperties: true , filter:"('busId' != null) AND ('distance' <= 20 * 1609) AND ('categories' in {\"pizza\"})"}--> running
+  //clientRecombee.send(new rqs.RecommendItemsToUser(username, 5,{returnProperties: true , filter:"('busId' != null)  AND (\"Burgers\" in 'categories')"}) ==> running
+
+  // `('busId' != null)  AND ("${term}" in 'categories')` ==> running
+
+  // filter:`('busId' != null)  AND ("${term}" in 'categories') AND ('price' == "${pricelevel}") AND (earth_distance(${lat},${longitude},number('latitude'),number('longitude')) < ${miles})`  ==> running
+  clientRecombee.send(new rqs.RecommendItemsToUser(username, 5,{returnProperties: true , 
+    filter:`('busId' != null)  AND (("${term}" in 'categories') OR ("${mainterm}" in 'categories')) AND ('price' == "${pricelevel}") AND (earth_distance(${lat},${longitude},number('latitude'),number('longitude')) < ${miles})`
+   }), (err, recommendations) => {
+     if(err || recommendations.recomms.length === 0) {res.status(404).json({err:"404 error"});}
+    console.log(recommendations);
+    res.send(recommendations.recomms)
+  });
+  
+});
 
 
 

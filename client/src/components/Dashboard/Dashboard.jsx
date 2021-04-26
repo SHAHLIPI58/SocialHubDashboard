@@ -12,9 +12,11 @@ import Rating from '../rating/Rating';
 import Visualization from '../Visualization/Visualization'
 import { scroller } from "react-scroll";
 
+
 // Imported <ReactModal /> component
 import ReactModal from 'react-modal';
 import Button from '@material-ui/core/Button';
+
 
 const Dashboard =(props)=>{
 
@@ -23,6 +25,7 @@ const Dashboard =(props)=>{
     const [longitude, setLongitude] = useState(undefined)
     const [latitude, setLatitude] = useState(undefined)
     const [locationBasedResults, setLocationBasedResults] = useState([]);
+    const [recommendationBasedResults, setRecommendationBasedResults] = useState([]);
     const [userPreference, setUserPreference] = useState({
         price: "1",
         category: "bars",
@@ -42,6 +45,8 @@ const Dashboard =(props)=>{
     const [modalData, setModalData] = useState([]);
     const handleSetModalData = (data) => {
         setModalData(data)
+        
+
     };
 
     // We are setting initial state for the Modal component i.e false
@@ -56,17 +61,33 @@ const Dashboard =(props)=>{
     const handleOpenModal = (data) => {
         handleSetModalData(data);
         setShowModal(true);
+        // console.log("Handle modal data function .....",data.resName)
+        //after this create Recombee AddDetailView with recommId here........
+      
+        axios.post(
+            'http://localhost:3001/recombeeAddDetailView',
+            {
+                username:username,
+                itemid:data.id
+                
+            },
+          ).then(response => {
+              console.log("api call returned recombeeAddDetailView: ", response.data);
+              
+          })
+          .catch(console.log);
+
+
       }
       
     // Sets state to false, meaning modal will disappear
     const handleCloseModal = () => {
         setShowModal(false);
+        //on close Modal again call recommendationSearch
+        //recommendationSearch(username);
       }
 
     
-
-      
-
       const scrollToSection = () => {
         scroller.scrollTo("scrollHere", {
           duration: 1000,
@@ -75,15 +96,8 @@ const Dashboard =(props)=>{
         });
       };
 
-
-      
     
-    
-
-
-
-
-    
+ 
     // async function locationBasedSearch(location) {
     //     console.log("calling search api with location: ", location);
     //     return fetch('http://localhost:3001/search', {
@@ -120,6 +134,7 @@ const Dashboard =(props)=>{
           .catch(console.log);
         
     }
+
 
     // let carsProperties = cars.map(car => {
     //     let properties = {
@@ -161,9 +176,35 @@ const Dashboard =(props)=>{
         //     console.log(business.location.address1);
         // });
     }
+
+
+    const recommendationSearch = (username) => {
+        //Axios call here to get Recommendation result from Recombee via nodejs request
+        console.log("recommendationSearch function call..");
+        axios.post(
+            'http://localhost:3001/recombeeRecommendation',
+            {  
+                 username:username,
+                 term: userPreference.term,
+                 mainterm : userPreference.category,
+                 price : userPreference.price,
+                 lat : latitude,
+                 longitude:longitude,
+                 miles: userPreference.radius
+            }).then(response => {
+              console.log("api call returned recommendationSearch: ", response.data);
+              setRecommendationBasedResults(response.data);
+              
+          })
+          .catch(console.log);
+
+    }
+
+    console.log("setRecommendationBasedResults ...",recommendationBasedResults)
     
 
     useEffect(()=> {
+
         if(username === undefined){
             setusername(sessionStorage.getItem('username'));
         }
@@ -190,6 +231,10 @@ const Dashboard =(props)=>{
         if(location !== undefined){
             locationBasedSearch(location);
         }
+
+        if(username !== undefined){
+            recommendationSearch(username);
+        }
             
 
     }, [username, location,longitude,latitude, userPreference, noResult]);
@@ -215,9 +260,19 @@ const Dashboard =(props)=>{
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     });
 
+
+    //sort alphabetically
+    
+    recommendationBasedResults.sort(function(a, b) {
+        var textA = a.values.name.toUpperCase();
+        var textB = b.values.name.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+
+    console.log("recommendationBasedResults after=",recommendationBasedResults)
   
 
-
+    //incard view send more data like longitude,latitude, distance,categories
  
     const CardViews = locationBasedResults.map(CardViewRes=>{
         return (
@@ -229,6 +284,24 @@ const Dashboard =(props)=>{
                           review_count = {CardViewRes.review_count}
                           display_address = {CardViewRes.location.display_address}
                           phone = {CardViewRes.phone}
+                          resId = {CardViewRes.id}
+                          openModal={handleOpenModal}
+                          
+                            />
+                )
+    });
+
+
+    const ReccardViews = recommendationBasedResults.map(CardViewRes=>{
+        return (
+                        <CardView  key = {CardViewRes.id}
+                          resName = {CardViewRes.values.name}
+                          resImg ={CardViewRes.values.image_url}
+                          price = {CardViewRes.values.price}
+                          rating={CardViewRes.values.rating}
+                          review_count = {CardViewRes.values.review_count}
+                          display_address = {CardViewRes.values.address}
+                          phone = {CardViewRes.values.phone}
                           resId = {CardViewRes.id}
                           openModal={handleOpenModal}
                           
@@ -342,7 +415,7 @@ const Dashboard =(props)=>{
                         <section className={classes.Posts} style={{marginTop:'120px'}}>
                             
                         {      
-                                CardViews.length > 0? CardViews :
+                                ReccardViews.length > 0? ReccardViews :
                                 (noResult? 
                                         <NoResultFound /> : <MoonLoader color='blue' loading={true} size={60} />
                                 )

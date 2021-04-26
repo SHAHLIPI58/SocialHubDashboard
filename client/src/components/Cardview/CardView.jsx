@@ -11,6 +11,7 @@ const CardView = (props) => {
         axios.post(
             'http://localhost:3001/otherUsersReviews',
             {
+                //here send userId also ===. not sure
                 resId:props.resId,
                
             },
