@@ -74,7 +74,7 @@ const Dashboard =(props)=>{
                 
             },
           ).then(response => {
-              //console.log("api call returned recombeeAddDetailView: ", response.data);
+              console.log("api call returned recombeeAddDetailView: ", response.data);
               
           })
           .catch(console.log);
@@ -159,7 +159,7 @@ const Dashboard =(props)=>{
         if(businesses.length === 0){
             setNoResult(true);
         }else{
-            //console.log("businesses: ", businesses);
+            console.log("businesses: ", businesses);
             
             let latlogproperties = businesses.map((business,index) =>{
                         let properties = {
@@ -169,7 +169,7 @@ const Dashboard =(props)=>{
                             };
                 return properties
             }) 
-            //console.log(latlogproperties)
+            console.log(latlogproperties)
             setLatlogproperties(latlogproperties)
         }
         // console.log("businesses: ", businesses);
@@ -182,7 +182,7 @@ const Dashboard =(props)=>{
 
     const recommendationSearch = (username) => {
         //Axios call here to get Recommendation result from Recombee via nodejs request
-        //console.log("recommendationSearch function call..");
+        console.log("recommendationSearch function call..");
         axios.post(
             'http://localhost:3001/recombeeRecommendation',
             {  
@@ -208,7 +208,7 @@ const Dashboard =(props)=>{
         const recommendationResults = resrecommendationResults;
         setRecommendationBasedResults(resrecommendationResults);
         if(recommendationBasedResults.length === 0){
-            //console.log("setNoRecResult ... ")
+            console.log("setNoRecResult ... ")
             setNoRecResult(true);
         }else{
             console.log("recommendationResults else comes: ");
@@ -221,7 +221,7 @@ const Dashboard =(props)=>{
                             };
                 return recproperties
             }) 
-            //console.log(reclatlogproperties1)
+            console.log(reclatlogproperties1)
             setRecLatlogproperties(reclatlogproperties1)
            
         }
@@ -253,7 +253,7 @@ const Dashboard =(props)=>{
         
     // }
 
-    //console.log("setRecommendationBasedResults ...",recommendationBasedResults)
+    console.log("setRecommendationBasedResults ...",recommendationBasedResults)
     
 
     useEffect(()=> {
@@ -303,9 +303,9 @@ const Dashboard =(props)=>{
     //     console.log("Updated pref: ", userPreference);
     // }, [userPreference]);
 
-     //console.log(userPreference)
+     console.log(userPreference)
     // console.log("length of locationBasedResults = ",locationBasedResults.length)
-   // console.log("locationBasedResults =",locationBasedResults)
+    console.log("locationBasedResults =",locationBasedResults)
 
 
     //sort alphabetically
@@ -324,7 +324,7 @@ const Dashboard =(props)=>{
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     });
 
-    //console.log("recommendationBasedResults after=",recommendationBasedResults)
+    console.log("recommendationBasedResults after=",recommendationBasedResults)
   
 
     //incard view send more data like longitude,latitude, distance,categories
@@ -364,7 +364,7 @@ const Dashboard =(props)=>{
                 )
     });
 
-    //console.log("cardviews: ", CardViews);
+    console.log("cardviews: ", CardViews);
 
 
     // Set some custom styling for ReactModal component

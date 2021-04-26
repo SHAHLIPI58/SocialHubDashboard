@@ -5,18 +5,19 @@ import Marker from './Marker';
 const AnyReactComponent = ({text}) => <div>{text}</div>;
 
 const GoogleMap = (props) => {
+  console.log('gMaps renderig...')
+  console.log(props.reclonglat)
     const userlong = Number(sessionStorage.getItem('longitude'))
     const userlat = Number(sessionStorage.getItem('latitude'))
     const [center, setCenter] = useState({lat: userlat, lng: userlong });
+    const [zoom, setZoom] = useState(11);
+
+
+    // useEffect(()=> {
+    //       console.log("GoogleMap useEffect()",props.reclonglat)
+    // },[props.longlat,props.reclonglat])
+
     
-    const [zoom, setZoom] = useState(9);
-//    const longlat = props.longlat
-//     console.log("from google map", longlat)
-//     longlat.map(ll=>{
-//         console.log(parseFloat(ll.longitude))
-//         console.log(parseFloat(ll.latitude))
-//     })
-    //setCenter({lat: 33.1976, lng: -96.6153})
     const getMapOptions = (maps) => {
      
         return {
@@ -40,16 +41,16 @@ const GoogleMap = (props) => {
 
 
     
-  //   const recmarkers = props.longlat.map((ll,index) =>{
-  //     return <Marker 
-  //             key ={index}
-  //             lat = {Number(ll.latitude)}
-  //             lng={Number(ll.longitude)} 
-  //             name ={ll.b_name}
-  //             color="pink"/>
+    const recmarkers = props.reclonglat.map((ll,index) =>{
+      return <Marker 
+              key ={index}
+              lat = {Number(ll.latitude)}
+              lng={Number(ll.longitude)} 
+              name ={ll.b_name}
+              color="blue"/>
               
       
-  // })
+  })
 
 
     return (
@@ -72,7 +73,7 @@ const GoogleMap = (props) => {
           color="red"/> 
 
           
-          {/* {recmarkers} */}
+          {recmarkers}
          
 
         </GoogleMapReact>

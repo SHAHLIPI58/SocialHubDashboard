@@ -11,12 +11,12 @@ const CardView = (props) => {
         axios.post(
             'http://localhost:3001/otherUsersReviews',
             {
-                //here send userId also ===. not sure
+                
                 resId:props.resId,
                
             },
           ).then(response => {
-              console.log("api call returned CardView for OtherUsersReviews: ", response.data);
+              //console.log("api call returned CardView for OtherUsersReviews: ", response.data);
               setUsersReviews(response.data)
               
           })
@@ -25,7 +25,7 @@ const CardView = (props) => {
 
     },[props.resId])
 
-    console.log("CardView usersReviews set variable..",usersReviews)
+    //console.log("CardView usersReviews set variable..",usersReviews)
 
 
      return (<article className={classes.CardView} onClick={() => props.openModal({resImg : props.resImg,

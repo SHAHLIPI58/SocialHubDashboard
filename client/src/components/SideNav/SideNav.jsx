@@ -78,6 +78,7 @@ return (
             <strong style={{color:'white'}} >Price Levels:</strong>
        
             <select name="pricelevel" id="pricelevel" onChange={onPriceRadioChange} className={classes.wgtmsr}>
+                    {/* <option value="" selected ={preferences.price === ""}>Any</option> */}
                     <option value="1" selected ={preferences.price === "1"}>$</option>
                     <option value="2" selected ={preferences.price === "2"}>$$</option>
                     <option value="3" selected ={preferences.price === "3"}>$$$</option>
@@ -91,6 +92,7 @@ return (
              <strong style={{color:'white'}}>Categories:</strong>
          
             <select name="categories" id="categories" onChange={onCategoryRadioChange} className={classes.wgtmsr} >
+                    {/* <option value="" selected={preferences.category === ""}>Any</option> */}
                     <option value="bars" selected={preferences.category === "bars"}>Bars</option>
                     <option value="restaurants" selected={preferences.category === "restaurants"}>Restaurants</option>
                     <option value="parks" selected={preferences.category === "parks"}>Parks</option>

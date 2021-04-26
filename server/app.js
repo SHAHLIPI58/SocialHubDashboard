@@ -145,8 +145,8 @@ app.post('/search',(req,res)=>{
   console.log(categories);
   console.log(price);
 
-  const bearerToken1 = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
-  const bearerToken="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
+  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  const bearerToken1="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {
         Authorization: `Bearer ${bearerToken}` 
@@ -188,8 +188,8 @@ app.post('/otherUsersReviews',(req,res)=>{
   let bussinessId = req.body.resId
   console.log("bussinessId :otherUsersReviews",bussinessId)
 
-  const bearerToken1 = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
-  const bearerToken="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
+  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  const bearerToken1="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {
         Authorization: `Bearer ${bearerToken}` 
@@ -336,11 +336,20 @@ app.post('/recombeeRecommendation',(req,res)=>{
   // `('busId' != null)  AND ("${term}" in 'categories')` ==> running
 
   // filter:`('busId' != null)  AND ("${term}" in 'categories') AND ('price' == "${pricelevel}") AND (earth_distance(${lat},${longitude},number('latitude'),number('longitude')) < ${miles})`  ==> running
+
+
+  // if(pricelevel === "" && mainterm === "" ){
+
+  // }else if(){
+
+  // }else{
+
+  // }
   clientRecombee.send(new rqs.RecommendItemsToUser(username, 5,{returnProperties: true , 
     filter:`('busId' != null)  AND (("${term}" in 'categories') OR ("${mainterm}" in 'categories')) AND ('price' == "${pricelevel}") AND (earth_distance(${lat},${longitude},number('latitude'),number('longitude')) < ${miles})`
    }), (err, recommendations) => {
-     if(err || recommendations.recomms.length === 0) {res.status(404).json({err:"404 error"});}
-    console.log(recommendations);
+     if(err ) {res.status(404).json({err:"404 error"});}
+    // console.log(recommendations);
     res.send(recommendations.recomms)
   });
   
