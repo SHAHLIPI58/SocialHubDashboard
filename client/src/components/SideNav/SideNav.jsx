@@ -70,6 +70,7 @@ return (
     <div>
 
 
+
         <div className={classes.sidenav}>
             
             {props.showVisualization? <div><button onClick={hideVisualizationView} className={classes.btnvisulization}>Back to Search Places</button> <br/><br/><br></br>
