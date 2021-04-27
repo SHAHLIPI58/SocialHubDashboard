@@ -62,7 +62,7 @@ const Visualization =(props)=>{
             <div className={classes.fixedheader2}>
                        <div className="scrollHere2">
                        <br/>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
                             <strong style={{color:'white'}}>Rating History</strong> 
                         </div>
             </div>
@@ -71,7 +71,10 @@ const Visualization =(props)=>{
             <div className = {classes.svgContainer}>
             <br></br>
             <br/>
+            
                 <RatingHistory username={props.username}/>
+           
+                
             </div>
 
             

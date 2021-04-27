@@ -27,8 +27,8 @@ const Dashboard =(props)=>{
     const [locationBasedResults, setLocationBasedResults] = useState([]);
     const [recommendationBasedResults, setRecommendationBasedResults] = useState([]);
     const [userPreference, setUserPreference] = useState({
-        price: "1",
-        category: "bars",
+        price: "",
+        category: "",
         radius: "20",
         location:undefined,
         term:""
@@ -205,15 +205,15 @@ const Dashboard =(props)=>{
 
 
     const mapRecommendation= (resrecommendationResults) => {
-        const recommendationResults = resrecommendationResults;
+        //const recommendationResults = resrecommendationResults;
         setRecommendationBasedResults(resrecommendationResults);
-        if(recommendationBasedResults.length === 0){
+        if(resrecommendationResults.length === 0){
             //console.log("setNoRecResult ... ")
             setNoRecResult(true);
         }else{
             console.log("recommendationResults else comes: ");
             
-            let reclatlogproperties1 = recommendationBasedResults.map((recommendation,index) =>{
+            let reclatlogproperties1 = resrecommendationResults.map((recommendation,index) =>{
                         let recproperties = {
                             "longitude":  recommendation.values.longitude,
                             "latitude": recommendation.values.latitude,

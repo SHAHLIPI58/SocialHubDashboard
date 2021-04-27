@@ -46,7 +46,7 @@ app.use('/login', (req, res) => {
         res.status(404).json({err:"404 error"});
         //res.status(401).send("Unauthorized");  
       }else if (JSON.stringify(results).length > 2){
-          console.log("result password" +results[0].location)
+          //console.log("result password" +results[0].location)
           res.send({
             token: 'test123',
             location: results[0].location,
@@ -79,7 +79,7 @@ app.use('/signup', (req, res) => {
   var long = req.body.longitude;
   var lat = req.body.latitude;
  
-  console.log("longitude = ",long,"latitude =",lat)
+  //console.log("longitude = ",long,"latitude =",lat)
   connection.query('SELECT * FROM `user` WHERE `username` = ?',[uname],
                   function(err, results, fields) {
 
@@ -141,11 +141,11 @@ app.post('/search',(req,res)=>{
   var term = req.body.term;
   var open_at = Math.floor(Date.now()/1000)
 
-  console.log(radius);
-  console.log(categories);
-  console.log(price);
-
-  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  // console.log(radius);
+  // console.log(categories);
+  // console.log(price);
+ const bearerToken = "helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx";
+  const bearerToken2 = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
   const bearerToken1="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {
@@ -172,11 +172,11 @@ app.post('/search',(req,res)=>{
     'https://api.yelp.com/v3/businesses/search',
     config
   ).then(response => {
-      console.log("api call returned: ", response.data);
+      //console.log("api call returned: ", response.data);
       res.send(response.data);
   })
   .catch(error => {
-    console.log(error);
+    //console.log(error);
     res.status(500).send(error);
   });
 
@@ -186,9 +186,9 @@ app.post('/search',(req,res)=>{
 // Different API Calls otherUsersReviews
 app.post('/otherUsersReviews',(req,res)=>{
   let bussinessId = req.body.resId
-  console.log("bussinessId :otherUsersReviews",bussinessId)
-
-  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  //console.log("bussinessId :otherUsersReviews",bussinessId)
+  const bearerToken ="helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx";  
+  const bearerToken2 = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
   const bearerToken1="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {
@@ -208,11 +208,11 @@ app.post('/otherUsersReviews',(req,res)=>{
   axios.get('https://api.yelp.com/v3/businesses/'+`${bussinessId}`+'/reviews',
     config
   ).then(response => {
-      console.log("api call returned otherusers Reviews: ", response.data);
+      //console.log("api call returned otherusers Reviews: ", response.data);
       res.send(response.data.reviews);
   })
   .catch(error => {
-    console.log(error);
+   //console.log(error);
     res.status(500).send(error);
   });
 
@@ -229,8 +229,8 @@ app.post('/ratings',(req,res)=>{
      var category = category1.charAt(0).toUpperCase()+category1.slice(1)
      var pricelevel = req.body.pricelevel
      var today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
-     console.log(today)
-     console.log("mongodb body request testing...",username, itemid, itemname, rating, category, pricelevel)
+     //console.log(today)
+     //console.log("mongodb body request testing...",username, itemid, itemname, rating, category, pricelevel)
 
       //insert function
       const insertDocuments = function(db, callback) {
@@ -239,7 +239,7 @@ app.post('/ratings',(req,res)=>{
           // Insert one documents or for more documents insertMany() instead of insert()
           collection.insertOne({ username: username, itemid : itemid, itemname: itemname, rating:rating,category:category,pricelevel:pricelevel,Date:new Date(today)}, 
               function(err, result) {
-            console.log('Inserted 44 documents into the collection');
+            //console.log('Inserted 44 documents into the collection');
             callback(result);
           });
       };
@@ -302,9 +302,9 @@ app.post('/recombeeAddDetailView',(req,res)=>{
     }
 );
 
-console.log("itemId....",itemId)
-console.log("username....",username)
-console.log("isoDate....",isoDate)
+// console.log("itemId....",itemId)
+// console.log("username....",username)
+// console.log("isoDate....",isoDate)
   
 })
 
@@ -345,8 +345,23 @@ app.post('/recombeeRecommendation',(req,res)=>{
   // }else{
 
   // }
-  clientRecombee.send(new rqs.RecommendItemsToUser(username, 5,{returnProperties: true , 
-    filter:`('busId' != null)  AND (("${term}" in 'categories') OR ("${mainterm}" in 'categories')) AND ('price' == "${pricelevel}") AND (earth_distance(${lat},${longitude},number('latitude'),number('longitude')) < ${miles})`
+  let query = `('busId' != null) AND (earth_distance(${lat},${longitude},number('latitude'),number('longitude')) < ${miles})`
+  if(price){
+    query = query + ` AND ('price' == "${pricelevel}")`
+  }
+
+  if(mainterm && term){
+    query = query + `AND (("${term}" in 'categories') OR ("${mainterm}" in 'categories'))`
+  }else if(mainterm){
+    query = query + ` AND ("${mainterm}" in 'categories')`
+  }else if(term){
+    query = query + ` AND ("${term}" in 'categories')`
+  }
+  query = `(`+query+`)`
+  // filter:`('busId' != null)  AND (("${term}" in 'categories') OR ("${mainterm}" in 'categories')) AND ('price' == "${pricelevel}") AND (earth_distance(${lat},${longitude},number('latitude'),number('longitude')) < ${miles})`
+  console.log("query.............",query)
+  clientRecombee.send(new rqs.RecommendItemsToUser(username, 6,{returnProperties: true , 
+       filter : query
    }), (err, recommendations) => {
      if(err ) {res.status(404).json({err:"404 error"});}
     // console.log(recommendations);
@@ -442,7 +457,7 @@ async function printCountByStart(client, username) {
    
 
   
-    console.log("nodejs", Object.keys(resfinal))
+    //console.log("nodejs", Object.keys(resfinal))
     res.send(resfinal)
 }
 
