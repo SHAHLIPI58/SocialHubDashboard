@@ -159,6 +159,8 @@ const Dashboard =(props)=>{
         setLocationBasedResults(businesses);
         if(businesses.length === 0){
             setNoResult(true);
+            //added extra
+            setLatlogproperties([])
         }else{
             //console.log("businesses: ", businesses);
             
@@ -211,6 +213,8 @@ const Dashboard =(props)=>{
         if(resrecommendationResults.length === 0){
             //console.log("setNoRecResult ... ")
             setNoRecResult(true);
+            //added extra
+            setRecLatlogproperties([])
         }else{
             console.log("recommendationResults else comes: ");
             

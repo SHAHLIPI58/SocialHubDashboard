@@ -225,9 +225,26 @@ app.post('/ratings',(req,res)=>{
      var itemid = req.body.itemid
      var itemname = req.body.itemname
      var rating = parseInt(req.body.rating)
+    
      var category1 = req.body.category
-     var category = category1.charAt(0).toUpperCase()+category1.slice(1)
-     var pricelevel = req.body.pricelevel
+     var category = "Any"
+     const categoriesList =['bars','restaurants','movietheaters','parks','bowling']
+     if(categoriesList.includes(category1)){
+      var category = category1.charAt(0).toUpperCase()+category1.slice(1)
+     }
+     
+
+     //var category = category1.charAt(0).toUpperCase()+category1.slice(1)
+     //var pricelevel = req.body.pricelevel
+
+     var pricelevel1 = req.body.pricelevel
+
+     var pricelevel = "Any"
+     const priceLevelList =['$','$$','$$$','$$$$']
+     if(priceLevelList.includes(pricelevel1)){
+         pricelevel = pricelevel1
+     }
+
      var today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
      //console.log(today)
      //console.log("mongodb body request testing...",username, itemid, itemname, rating, category, pricelevel)
