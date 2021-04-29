@@ -139,8 +139,8 @@ const Signup =(props)=> {
                     <input type="text"  placeholder="Username"  className={classes.email} 
                                         onChange={e => setUserName(e.target.value)}/>
                     
-                    <input type="text"  placeholder="Email-Id"  className={classes.email} 
-                                        />
+                    {/* <input type="text"  placeholder="Email-Id"  className={classes.email} 
+                                        /> */}
                     
                     <input type="password"  placeholder="Password"  className={classes.email} 
                                             onChange={e => setPassword(e.target.value)}/>

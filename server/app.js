@@ -119,7 +119,58 @@ app.use('/signup', (req, res) => {
   //res.status(401).send("Unauthorized..");
 })
 
+app.post('/userprofile',(req,res)=>{
 
+  var uname = req.body.username
+
+  connection.query('SELECT * FROM `user` WHERE `username` = ? ',[uname],
+  function(err, results, fields) {
+     // console.log("results..."+results.body)
+      if(err ){
+        console.log("error")
+        res.status(404).json({err:"404 error"});
+        //res.status(401).send("Unauthorized");  
+      }else if (JSON.stringify(results).length > 2){
+          //console.log("result password" +results[0].location)
+          res.send({
+            username: results[0].username,
+            location: results[0].location,
+            
+          }); 
+      }else{
+        res.status(401).send("Unauthorized");
+      }
+      // if(results.length != 0){
+      //     res.send({
+      //       token: 'test123'
+      //     }); 
+      // }
+  
+  });
+
+})
+
+
+app.post('/setUserPassword',(req,res)=>{
+
+  var psw = req.body.password
+  var username = req.body.username
+
+  connection.query('UPDATE `user` SET `password` = ? WHERE `username` = ?',
+                   [psw,username], function (error, results, fields) {
+    if (error) {
+      res.status(404).json({err:"404 error"});
+    }else if (JSON.stringify(results).length > 2){
+      res.status(200).json({success:"OK"});
+    }else{
+      res.status(401).send("Unauthorized");
+    }
+   
+  })
+
+
+
+})
 app.get('/testRecombee',(req,res)=>{
 
   //  recombeeUserInfo ={}
@@ -144,8 +195,8 @@ app.post('/search',(req,res)=>{
   // console.log(radius);
   // console.log(categories);
   // console.log(price);
- const bearerToken = "helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx";
-  const bearerToken2 = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+ const bearerToken2 = "helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx";
+  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
   const bearerToken1="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {
@@ -187,8 +238,8 @@ app.post('/search',(req,res)=>{
 app.post('/otherUsersReviews',(req,res)=>{
   let bussinessId = req.body.resId
   //console.log("bussinessId :otherUsersReviews",bussinessId)
-  const bearerToken ="helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx";  
-  const bearerToken2 = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  const bearerToken2 ="helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx";  
+  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
   const bearerToken1="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {

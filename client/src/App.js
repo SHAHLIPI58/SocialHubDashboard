@@ -11,6 +11,7 @@ import Signup from './components/Signup/Signup'
 import BarChartComponent from './components/D3Charts/BarChartComponent'
 import BarChart from'./components/D3Charts/BarChart'
 import PieChart from './components/D3Charts/PieChart'
+import Profile from './components/Profile/Profile'
 
 
 
@@ -96,6 +97,9 @@ const App = (props)=> {
               </Route>
               <Route exact path = "/signup">
                 {token ? <Redirect to="/dashboard" />  :  <Signup/>}
+              </Route>
+              <Route exact path = "/Profile">
+                {token ? <Profile deleteToken={deleteToken} />: <Redirect to="/dashboard" />}
               </Route>
             </switch>
          </BrowserRouter>

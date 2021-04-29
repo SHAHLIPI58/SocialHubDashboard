@@ -9,6 +9,11 @@ const header = (props)=>{
         <p style ={{float:'right'}}>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</p>
         <button type="submit" onClick={props.deleteToken} className= {classes.btnLogout} style={{float:'right', marginTop: '13px', textAlign:'center'}}> Logout &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</button> 
         <p style ={{float:'right'}}>&nbsp; &nbsp;&nbsp;</p>
+        <button type="button" 
+                onClick={(e) => {
+                e.preventDefault();
+                window.location.href='/Profile';
+                }} className= {classes.btnLogout} style={{float:'right', marginTop: '13px', textAlign:'center'}}> Profile &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</button>
         {/* <input type ="text" placeholder="search"  style={{float:'right', marginTop: '13px'}} />&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; */}
         </div>
 }
