@@ -38,8 +38,6 @@ const Dashboard =(props)=>{
 
     const [noResult, setNoResult] = useState(false);
     const [norecResult, setNoRecResult] = useState(false);
-    // const longlat = [{latitude:33.168936, longitude:-96.663925 },
-    //                  {latitude:33.04213,longitude:-96.75218}]
     const [latlogproperties,setLatlogproperties]= useState([]);
     const [reclatlogproperties,setRecLatlogproperties]= useState([]);
 
@@ -64,9 +62,7 @@ const Dashboard =(props)=>{
     const handleOpenModal = (data) => {
         handleSetModalData(data);
         setShowModal(true);
-        // console.log("Handle modal data function .....",data.resName)
-        //after this create Recombee AddDetailView with recommId here........
-      
+        
         axios.post(
             'http://localhost:3001/recombeeAddDetailView',
             {
@@ -86,8 +82,7 @@ const Dashboard =(props)=>{
     // Sets state to false, meaning modal will disappear
     const handleCloseModal = () => {
         setShowModal(false);
-        //on close Modal again call recommendationSearch
-        //recommendationSearch(username);
+       
       }
 
     
@@ -101,23 +96,7 @@ const Dashboard =(props)=>{
 
     
  
-    // async function locationBasedSearch(location) {
-    //     console.log("calling search api with location: ", location);
-    //     return fetch('http://localhost:3001/search', {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify({location: location})
-    //       //body:JSON.stringify({username:'lipishah'})
-    //     })
-    //       .then(data => {
-    //           console.log(data.json());
-    //         })
-    //       .catch(function(error) {
-    //         console.log(error);
-    //     });
-    //    }
+    
 
     const locationBasedSearch =(location)=>{
         axios.post(
@@ -139,20 +118,6 @@ const Dashboard =(props)=>{
     }
 
 
-    // let carsProperties = cars.map(car => {
-    //     let properties = {
-    //       "capacity": car.capacity,
-    //       "size": "large"
-    //     };
-    //     if (car.capacity <= 5){
-    //       properties['size'] = "medium";
-    //     }
-    //     if (car.capacity <= 3){
-    //       properties['size'] = "small";
-    //     }
-    //     return properties;
-    //    });
-    //    console.log(carsProperties);
 
     const filterLocationBasedSearch = (locationResults) => {
         const businesses = locationResults.businesses;
@@ -162,7 +127,7 @@ const Dashboard =(props)=>{
             //added extra
             setLatlogproperties([])
         }else{
-            //console.log("businesses: ", businesses);
+            
             
             let latlogproperties = businesses.map((business,index) =>{
                         let properties = {
@@ -172,20 +137,16 @@ const Dashboard =(props)=>{
                             };
                 return properties
             }) 
-            //console.log(latlogproperties)
+            
             setLatlogproperties(latlogproperties)
         }
-        // console.log("businesses: ", businesses);
-        // businesses.map(business =>{
-        //     console.log(business.name);
-        //     console.log(business.location.address1);
-        // });
+       
     }
 
 
     const recommendationSearch = (username) => {
         //Axios call here to get Recommendation result from Recombee via nodejs request
-        //console.log("recommendationSearch function call..");
+        
         axios.post(
             'http://localhost:3001/recombeeRecommendation',
             {  
@@ -197,9 +158,8 @@ const Dashboard =(props)=>{
                  longitude:longitude,
                  miles: userPreference.radius
             }).then(response => {
-             // console.log("api call returned recommendationSearch: ", response.data);
-             // setRecommendationBasedResults(response.data);
-             mapRecommendation(response.data); // async await works here.......................
+            
+             mapRecommendation(response.data); 
               
           })
           .catch(console.log);
@@ -208,15 +168,14 @@ const Dashboard =(props)=>{
 
 
     const mapRecommendation= (resrecommendationResults) => {
-        //const recommendationResults = resrecommendationResults;
+      
         setRecommendationBasedResults(resrecommendationResults);
         if(resrecommendationResults.length === 0){
-            //console.log("setNoRecResult ... ")
+         
             setNoRecResult(true);
             //added extra
             setRecLatlogproperties([])
         }else{
-            console.log("recommendationResults else comes: ");
             
             let reclatlogproperties1 = resrecommendationResults.map((recommendation,index) =>{
                         let recproperties = {
@@ -226,39 +185,12 @@ const Dashboard =(props)=>{
                             };
                 return recproperties
             }) 
-            //console.log(reclatlogproperties1)
+           
             setRecLatlogproperties(reclatlogproperties1)
            
         }
         
     }
-
-
-    // const mapRecommendation= (resrecommendationResults) => {
-    //     const recommendationResults = resrecommendationResults;
-    //     setRecommendationBasedResults(recommendationResults);
-    //     if(recommendationResults.length === 0){
-    //         console.log("setNoRecResult ...")
-    //         setNoRecResult(true);
-    //     }else{
-    //         console.log("recommendationResults: ", recommendationResults);
-            
-    //         let reclatlogproperties = recommendationResults.map((recommendation,index) =>{
-    //                     let properties = {
-    //                         "longitude":  recommendation.values.longitude,
-    //                         "latitude": recommendation.values.latitude,
-    //                         "b_name": recommendation.values.name
-    //                         };
-    //             return properties
-    //         }) 
-    //         console.log(reclatlogproperties)
-    //         setRecLatlogproperties(reclatlogproperties)
-           
-    //     }
-        
-    // }
-
-    //console.log("setRecommendationBasedResults ...",recommendationBasedResults)
     
 
     useEffect(()=> {
@@ -299,19 +231,7 @@ const Dashboard =(props)=>{
 
     }, [username, location,longitude,latitude, userPreference, noResult,norecResult]);
 
-    // useEffect(() => {
-
-    // }, [showRatings]);
-
-
-    // useEffect(() => {
-    //     console.log("Updated pref: ", userPreference);
-    // }, [userPreference]);
-
-     //console.log(userPreference)
-    // console.log("length of locationBasedResults = ",locationBasedResults.length)
-   // console.log("locationBasedResults =",locationBasedResults)
-
+    
 
     //sort alphabetically
     locationBasedResults.sort(function(a, b) {
@@ -329,8 +249,7 @@ const Dashboard =(props)=>{
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     });
 
-    //console.log("recommendationBasedResults after=",recommendationBasedResults)
-  
+    
 
     //incard view send more data like longitude,latitude, distance,categories
  
@@ -369,8 +288,6 @@ const Dashboard =(props)=>{
                 )
     });
 
-    //console.log("cardviews: ", CardViews);
-
 
     // Set some custom styling for ReactModal component
     const customStyles = {
@@ -389,15 +306,7 @@ const Dashboard =(props)=>{
         }
       };
 
-    //   const style1={{
-    //     overlay: {
-    //       backgroundColor: 'papayawhip'
-    //     },
-    //     content: {
-    //       color: 'lightsteelblue'
-    //     }
-    //   }};
-    console.log("modalData.......",modalData)
+   
     return(<div>
                 <ReactModal 
                 isOpen={showModal}
@@ -457,11 +366,7 @@ const Dashboard =(props)=>{
                           
                         </section>
                     </div>
-                    {/* <div style={{width:'150%', height:'10px',position:'relative',background:'orange'}}>   
-                       
-                            <h1>Recommendation</h1>
-                                         
-                   </div> */}
+               
                    <div className={classes.fixedheader1}>
                        <div className="scrollHere">
                        <br/>

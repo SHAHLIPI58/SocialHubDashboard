@@ -16,7 +16,7 @@ const CardView = (props) => {
                
             },
           ).then(response => {
-              //console.log("api call returned CardView for OtherUsersReviews: ", response.data);
+              
               setUsersReviews(response.data)
               
           })
@@ -25,7 +25,7 @@ const CardView = (props) => {
 
     },[props.resId])
 
-    //console.log("CardView usersReviews set variable..",usersReviews)
+    
 
 
      return (<article className={classes.CardView} onClick={() => props.openModal({resImg : props.resImg,

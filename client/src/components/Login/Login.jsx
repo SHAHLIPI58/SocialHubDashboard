@@ -1,8 +1,6 @@
 import React, { useState }  from 'react';
 import classes from './Login.css';
 import PropTypes from 'prop-types';
-//import 'bootstrap/dist/css/bootstrap.min.css';
-
 import SideNavPub from '../SideNav/SideNavPub'
 import HeaderPub from '../Header/HeaderPub'
 
@@ -22,11 +20,10 @@ const Login =(props)=> {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(credentials)
-          //body:JSON.stringify({username:'lipishah'})
+          
         })
           .then(data => data.json())
           .catch(function(error) {
-            //console.log(error);
             setError(true);
         });
        }
@@ -44,7 +41,7 @@ const Login =(props)=> {
             sessionStorage.setItem('longitude', token.longitude);
             sessionStorage.setItem('latitude', token.latitude);
         }
-        // window.location.replace("http://localhost:3000/dashboard");
+       
     }
     
     const validateForm =()=> {
@@ -57,26 +54,6 @@ const Login =(props)=> {
         <div className={classes.loginwrapper}>
              <HeaderPub/>
             <SideNavPub/>
-        {/* <h1>Please Log In</h1>
-          <form onSubmit={handleSubmit}> 
-            <label>
-                <p>Username</p>
-                <input type="text" onChange={e => setUserName(e.target.value)}/> */}
-                {/* <div className ={classes.divCheckbox} >Empty username</div> */}
-            {/* </label>
-            <label>
-                <p>Password</p>
-                <input type="password" onChange={e => setPassword(e.target.value)}/>
-            </label>
-            <div>
-                <button type="submit" disabled={!validateForm()}>Submit</button>
-                <button type="button" onClick={event =>  window.location.href='/Signup'}>signup</button>
-            </div>
-            {error ? <div>Invalid credentials</div> : null}
-            </form> */}
-
-
-
             <form onSubmit={handleSubmit}>
                     <div className={classes.box}>
                     <h1 className={classes.h1}>Please Login</h1>
@@ -103,8 +80,6 @@ const Login =(props)=> {
     )
 }
 
-// Login.propTypes = {
-//     setToken: PropTypes.func.isRequired
-//   }
+
 
 export default Login;

@@ -26,8 +26,7 @@ const Profile =(props)=>{
     
 
     const getUsersProfile =(username) =>{
-
-        axios.post(
+      axios.post(
             'http://localhost:3001/userprofile',
             {  
                  username:username
@@ -61,16 +60,12 @@ const Profile =(props)=>{
               }
               if(data.status === 401 || data.status === 404){
                 setError(true);
-                //setMessage("404 error")
-                //window.location.replace("http://localhost:3000/login");
               }
               data.json()
               
         })
         .catch(function(error) {
             // console.error('There was an error!', error.status);
-            // //console.log(error.response.status);
-            // setError(true);
         });
 
     }
@@ -82,10 +77,7 @@ const Profile =(props)=>{
           username:username,
           password: password
         });
-        // if(token){
-        //     props.saveToken(token);
-        // }
-        // window.location.replace("http://localhost:3000/dashboard");
+       
     }
 
     const validateForm =()=> {
@@ -106,33 +98,26 @@ const Profile =(props)=>{
             </div>
             {/* sideNav end........... */}
 
-        <Header deleteToken={props.deleteToken} username={username}/>
+            <Header deleteToken={props.deleteToken} username={username}/>
 
+            <form onSubmit={handleSubmitPassword}>
+                      <div className={classes.box}>
+                        <h1 className={classes.h1}>User Profile</h1>
 
-        <form onSubmit={handleSubmitPassword}>
-                    <div className={classes.box}>
-                    <h1 className={classes.h1}>User Profile</h1>
+                        <input type="text"  placeholder="Username"  className={classes.email} 
+                                            value={username} disabled/>
+                        
+                        <input id="locationInput" type="text"  className={classes.email} value={userLocation} disabled  />
 
-                    <input type="text"  placeholder="Username"  className={classes.email} 
-                                        value={username} disabled/>
-                    
-                    <input id="locationInput" type="text"  className={classes.email} value={userLocation} disabled  />
+                        <input type="password"  placeholder="Password"  className={classes.email} 
+                                                onChange={e => {setPassword(e.target.value)
+                                                    setSuccess(false)}}/>
 
-                    <input type="password"  placeholder="Password"  className={classes.email} 
-                                            onChange={e => {setPassword(e.target.value)
-                                                setSuccess(false)}}/>
-
-                    {error ?<div className={classes.invalidcredential}>Something went wrong!</div>:null}
-                    {success ?<div className={classes.invalidcredential}>Password Modified Successfuly</div>:null}
-                    <button type="submit" className={classes.btn} disabled={!validateForm()}>Modify</button>
-
-                     
-                    
-                    </div> 
-                
-              </form>
-
-       
+                        {error ?<div className={classes.invalidcredential}>Something went wrong!</div>:null}
+                        {success ?<div className={classes.invalidcredential}>Password Modified Successfuly</div>:null}
+                        <button type="submit" className={classes.btn} disabled={!validateForm()}>Modify</button>
+                      </div> 
+            </form>
     </div>)
 }
 

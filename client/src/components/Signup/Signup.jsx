@@ -1,6 +1,5 @@
 import React, { useEffect, useState }  from 'react';
 import classes from './Signup.css';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import SideNavPub from '../SideNav/SideNavPub'
 import HeaderPub from '../Header/HeaderPub'
@@ -28,17 +27,9 @@ const Signup =(props)=> {
         .catch(function(error) {
             console.log("Error occured while fetching the current location: ", error);
         });
-       }
+      }
   
-    // https://geolocation-db.com/jsonp/
-
-    // useEffect(()=> {
-    //     if(location === undefined){
-    //         setusername(sessionStorage.getItem('username'));
-    // }
-    // }, [username]);
-    
-
+  
     async function signupUser(credentials) {
         console.log(credentials);
         return fetch('http://localhost:3001/signup', {
@@ -51,8 +42,6 @@ const Signup =(props)=> {
          
         })
         .then(data => {
-              console.log(data.status)
-             
               if(data.status === 200){
                 setError(true);
                 return
@@ -66,8 +55,6 @@ const Signup =(props)=> {
         })
         .catch(function(error) {
             // console.error('There was an error!', error.status);
-            // //console.log(error.response.status);
-            // setError(true);
         });
        }
 
@@ -80,10 +67,7 @@ const Signup =(props)=> {
           longitude,
           latitude
         });
-        // if(token){
-        //     props.saveToken(token);
-        // }
-        // window.location.replace("http://localhost:3000/dashboard");
+        
     }
     
     const validateForm =()=> {
@@ -92,7 +76,7 @@ const Signup =(props)=> {
     }
 
     useEffect(() => {
-        // getCurrentLocation();
+        
         axios.get(`https://geolocation-db.com/json/`)
       .then(res => {
 
@@ -108,30 +92,6 @@ const Signup =(props)=> {
 
             <HeaderPub/>
             <SideNavPub/>
-        {/* <h1>Please SignUp</h1>
-        <form onSubmit={handleSubmit}> 
-            <label>
-                <p>Username</p>
-                <input type="text" onChange={e => setUserName(e.target.value)}/> */}
-                {/* <div className ={classes.divCheckbox} >Empty username</div> */}
-            {/* </label>
-            <label>
-                <p>Password</p>
-                <input type="password" onChange={e => setPassword(e.target.value)}/>
-            </label>
-
-            <label>
-                <p>Location</p>
-                <input id="locationInput" type="text" />
-            </label>
-            <div>
-                <button type="submit" disabled={!validateForm()}>Signup</button>
-                <button type="button" onClick={event =>  window.location.href='/Login'}>Login</button>
-            </div>
-            {error ? <div>User Already Exist!</div> : null}
-            {message !==""? <div>Profile Created Successfully. Please Login!</div>:null}
-            </form> */}
-
             <form onSubmit={handleSubmit}>
                     <div className={classes.box}>
                     <h1 className={classes.h1}>Please SignUp</h1>
@@ -165,9 +125,5 @@ const Signup =(props)=> {
             
     )
 }
-
-// Signup.propTypes = {
-//     setToken: PropTypes.func.isRequired
-//   }
 
 export default Signup;

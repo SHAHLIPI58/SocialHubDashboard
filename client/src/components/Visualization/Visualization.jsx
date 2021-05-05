@@ -61,7 +61,7 @@ const Visualization =(props)=>{
           <form onSubmit={{}} style={{marginLeft:'20px'}}>
             Select Time Span :   
             <select name="pricelevel" id="pricelevel" onChange={onSpanChange} >
-                    <option value="365" selected ={spanpreferences.spanlevel === "365"} >Any</option>
+                    <option value="365" selected ={spanpreferences.spanlevel === "365"} >1 Year</option>
                     <option value="1" selected ={spanpreferences.spanlevel === "1"}> 1 Day</option>
                     <option value="7" selected ={spanpreferences.spanlevel === "7"} > 7 Days</option>
 

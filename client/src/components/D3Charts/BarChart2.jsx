@@ -15,14 +15,6 @@ function BarChart2 (props) {
    },[props.data])
 
     const drawChart = () => {
-        // let data = {
-        //     "FACEBOOK": 3,
-        //     "GITHUB"  : 10,
-        //     "GOOGLE"  : 6,
-        //     "TWITTER" : 1,
-        //     "WEIBO"   : 1
-        // };
-
         
         // Remove the old svg
         d3.select(`#${props.chartId}`)

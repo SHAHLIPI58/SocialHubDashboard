@@ -1,6 +1,5 @@
 import React, { useState }  from 'react';
 import classes from './LoginPub.css';
-import PropTypes from 'prop-types';
 import SideNavPub from '../SideNav/SideNavPub'
 import HeaderPub from '../Header/HeaderPub'
 
@@ -42,7 +41,7 @@ const LoginPub =(props)=> {
             sessionStorage.setItem('longitude', token.longitude);
             sessionStorage.setItem('latitude', token.latitude);
         }
-        // window.location.replace("http://localhost:3000/dashboard");
+        
     }
     
     const validateForm =()=> {
@@ -56,23 +55,7 @@ const LoginPub =(props)=> {
             <SideNavPub/>
            
             <div className={classes.loginpubwrapper}>
-            {/* <h1>Please Log In</h1>
-            <form onSubmit={handleSubmit}> 
-                <label>
-                    <p>Username</p>
-                    <input type="text" onChange={e => setUserName(e.target.value)}/> */}
-                    {/* <div className ={classes.divCheckbox} >Empty username</div> */}
-                {/* </label>
-                <label>
-                    <p>Password</p>
-                    <input type="password" onChange={e => setPassword(e.target.value)}/>
-                </label>
-                <div>
-                    <button type="submit" disabled={!validateForm()}>Submit</button>
-                    <button type="button" onClick={event =>  window.location.href='/Signup'}>signup</button>
-                </div>
-                {error ? <div>Invalid credentials</div> : null}
-                </form> */}
+           
 
                 <form onSubmit={handleSubmit}>
                     <div className={classes.box}>
@@ -97,8 +80,6 @@ const LoginPub =(props)=> {
     )
 }
 
-// Login.propTypes = {
-//     setToken: PropTypes.func.isRequired
-//   }
+
 
 export default LoginPub;

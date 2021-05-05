@@ -7,18 +7,11 @@ import Marker from './Marker';
 const AnyReactComponent = ({text}) => <div>{text}</div>;
 
 const GoogleMap = (props) => {
-  console.log('gMaps renderig...')
-  console.log(props.reclonglat)
+  
     const userlong = Number(sessionStorage.getItem('longitude'))
     const userlat = Number(sessionStorage.getItem('latitude'))
     const [center, setCenter] = useState({lat: userlat, lng: userlong });
     const [zoom, setZoom] = useState(11);
-
-
-    // useEffect(()=> {
-    //       console.log("GoogleMap useEffect()",props.reclonglat)
-    // },[props.longlat,props.reclonglat])
-
     
     const getMapOptions = (maps) => {
      
@@ -65,9 +58,6 @@ const GoogleMap = (props) => {
         >
 
          
-
-        
-          
           {markers}
 
           <Marker 

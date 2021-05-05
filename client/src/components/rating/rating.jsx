@@ -9,12 +9,6 @@ const Rating =(props)=>{
     const [rating, setRating] = useState("5");
 
     const saveRating = () => {
-        /**
-         * 1. Make an axios call and save the data i.e props.modalData i.e {url: .., name: ..}
-         * 
-         * 2. After the api call returns, then close modal.
-         */
-
          axios.post(
             'http://localhost:3001/ratings',
             {
@@ -33,8 +27,6 @@ const Rating =(props)=>{
               
           })
           .catch(console.log);
-
-        // We will do (2) for now
         props.handleCloseModal();
     };
     console.log(props.modalData)
@@ -55,28 +47,17 @@ const Rating =(props)=>{
                       
                 )
     });
-    // const address = props.modalData.display_address.forEach((entry)=>{
-    //    console.log(entry)
-    //    return <p>entry</p>
-    // })
 
     return <div className={classes.boxRatingModal} style={{backgroundColor:'white'}} >
         <div className={classes.ratingModalDetail}>
             <p >{props.modalData.resName}</p>
-            {/* <p>{props.modalData.resImg}</p> */}
             <p >Price Level : {props.modalData.price} 
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Review Counts : {props.modalData.review_count}
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Avg. Rating :{props.modalData.rating} </p>
-            {/* <p className={classes.ratingModalDetail}></p> */}
-            {/* <p className={classes.ratingModalDetail}></p> */}
             <p >{props.modalData.phone}</p>
             <p >{props.modalData.display_address.toString()}</p>
         </div>
-       
-        {/* <p>{props.modalData.dummyId}</p> */}
         {UsersRatingsViews}
-        {/* <p>{address}</p> */}
-        {/* <input type = "text" placeholder="provide rating here" ></input> */}
         <div className={classes.ratingModalDetail}>
         Provide Rating : &nbsp;
         <select name="stars" id="stars" onChange={e => setRating(e.target.value)}>

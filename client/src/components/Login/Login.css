@@ -1,15 +1,11 @@
 .loginwrapper {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
 
     font-family: 'Open Sans', sans-serif;
     background:white;
-    /* margin: 0 auto 0 auto;   */
     width:100%; 
     text-align:center;
     margin: 150px 0px 20px 0px;  
-    /* margin-left: 80px; */
+    
     
 }
 
@@ -18,11 +14,6 @@
 }
 
 
-/* .p{
-    font-size:12px;
-    text-decoration: none;
-    color:#ffffff;
-  } */
   
   .h1{
     font-size:1.5em;
@@ -45,7 +36,6 @@
     border-bottom: #ccc 2px solid;
     padding: 8px;
     width:250px;
-    /* color:#AAAAAA; */
     color:#333;
     margin-top:10px;
    

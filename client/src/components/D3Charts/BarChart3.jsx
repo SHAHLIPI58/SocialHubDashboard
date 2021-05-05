@@ -10,8 +10,7 @@ function BarChart3 (props) {
         if(Object.keys(props.data).length > 0){
             drawChart();
         }
-        //drawChart();
-        //console.log("useEffect Barchart3",props.data)
+       
 
    },[props.data])
 
@@ -109,10 +108,7 @@ function BarChart3 (props) {
 
       }
       
-      
-       //drawChart();
-     
-
+    
         return <div id={props.chartId}></div>
 }
 
