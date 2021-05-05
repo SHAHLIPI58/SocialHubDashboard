@@ -34,6 +34,7 @@ const RatingHistory = (props)=>{
                     <td className={classes.userratingtd}>{TableViewRes.category}</td>
                     <td className={classes.userratingtd}>{TableViewRes.pricelevel}</td>
                     <td className={classes.userratingtd}>{TableViewRes.rating}</td>
+                    <td className={classes.userratingtd}>{TableViewRes.Date.split("T")[0]}</td>
                 </tr>
                       
                 )
@@ -48,6 +49,7 @@ const RatingHistory = (props)=>{
                     <th className={classes.userratingth}>Category</th>
                     <th className={classes.userratingth}>PriceLevel</th>
                     <th className={classes.userratingth}>Rating</th>
+                    <th className={classes.userratingth}>Date</th>
                 </tr>
                 {TableViews}
             </table>

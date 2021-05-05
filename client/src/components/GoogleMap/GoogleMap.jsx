@@ -2,6 +2,8 @@ import React, { Component, useEffect, useState }  from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 
+
+
 const AnyReactComponent = ({text}) => <div>{text}</div>;
 
 const GoogleMap = (props) => {
@@ -61,6 +63,8 @@ const GoogleMap = (props) => {
           defaultZoom={zoom}
           options={getMapOptions}
         >
+
+         
 
         
           

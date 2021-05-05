@@ -14,13 +14,14 @@ const PieChartFavCategoryCount = (props)=>{
             'http://localhost:3001/getfindCountFavCatanalysisData',
             {
                 username: props.username,
+                visulizationfilter : props.visulizationfilter
             },
           ).then(response => {
               console.log("api call returned piechartFavouritecategorry: ", response.data);
               setData(response.data)
           })
           .catch(console.log);
-    }, []);
+    }, [props.visulizationfilter]);
     console.log("PieChartFavouriteCategoryCount react function...",props.username)
     console.log(data)
 

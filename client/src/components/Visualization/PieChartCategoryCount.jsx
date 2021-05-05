@@ -14,13 +14,14 @@ const PieChartCategoryCount = (props)=>{
             'http://localhost:3001/getfindCountCategorySanalysisData',
             {
                 username: props.username,
+                visulizationfilter : props.visulizationfilter
             },
           ).then(response => {
               console.log("api call returned piechartcategorry: ", response.data);
               setData(response.data)
           })
           .catch(console.log);
-    }, []);
+    }, [props.visulizationfilter]);
     console.log("PieChartCategoryCount react function...",props.username)
     console.log(data)
 

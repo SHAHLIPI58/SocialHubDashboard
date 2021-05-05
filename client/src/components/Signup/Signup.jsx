@@ -148,7 +148,7 @@ const Signup =(props)=> {
                     <input type="password"  placeholder="ReEnter Password"  className={classes.email}
                                            />
 
-                    <input id="locationInput" type="text"  className={classes.email}  />
+                    <input id="locationInput" type="text"  className={classes.email} readOnly />
 
                     {error ?<div className={classes.invalidcredential}>User Already Exist!</div>:null}
                     <button type="submit" className={classes.btn} disabled={!validateForm()}>SignUp</button>

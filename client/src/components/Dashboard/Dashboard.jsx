@@ -433,7 +433,8 @@ const Dashboard =(props)=>{
                     scrollToSection = {scrollToSection}/>
                 <Header deleteToken={props.deleteToken} username={username}/>
                 
-                {showVisualization? <div className={classes.Graphs}><Visualization username={username}/></div> : 
+                {showVisualization? <div className={classes.Graphs}><Visualization username={username} setShowVisualization={setShowVisualization} 
+                    showVisualization={showVisualization}/></div> : 
                 <div>
                     <div>
                         <section className={classes.Posts}>

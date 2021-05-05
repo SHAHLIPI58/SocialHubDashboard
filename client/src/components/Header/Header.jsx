@@ -13,7 +13,7 @@ const header = (props)=>{
                 onClick={(e) => {
                 e.preventDefault();
                 window.location.href='/Profile';
-                }} className= {classes.btnLogout} style={{float:'right', marginTop: '13px', textAlign:'center'}}> Profile &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</button>
+                }} className= {classes.btnLogout} style={{float:'right', marginTop: '13px', textAlign:'center', background:'#3498db', border: '#2980b9 1px solid'}}> Profile &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</button>
         {/* <input type ="text" placeholder="search"  style={{float:'right', marginTop: '13px'}} />&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; */}
         </div>
 }

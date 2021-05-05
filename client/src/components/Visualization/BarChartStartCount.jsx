@@ -14,13 +14,14 @@ const BarChartStartCount = (props)=>{
             'http://localhost:3001/getfindCountStartanalysisData',
             {
                 username: props.username,
+                visulizationfilter : props.visulizationfilter
             },
           ).then(response => {
               console.log("api call returned barchartstar: ", response.data);
               setData(response.data)
           })
           .catch(console.log);
-    }, []);
+    }, [props.visulizationfilter]);
     console.log("BarChartStarCount react function...",props.username)
     console.log("object.keys at the client side",Object.keys(data))
 

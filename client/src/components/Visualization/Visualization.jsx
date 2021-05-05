@@ -26,14 +26,58 @@ const Visualization =(props)=>{
     // const data1 = [{ label: 'Apples', value: 10 }, { label: 'Oranges', value: 20 },{ label: 'Pineaaple', value: 20 }];
     // const data = [{"label":"3star","value":1},{"label":"4star","value":4},{"label":"5star","value":4},{"label":"3star","value":2},{"label":"4star","value":3}]
     console.log("Visulization.............username props", props.username)
+    const [spanpreferences, setSpanPreferences] = useState({spanlevel : "365"});
 
 
+    useEffect(()=> {
+        setSpanPreferences({
+            ...spanpreferences,
+            spanlevel: spanpreferences.spanlevel,
+            
+        })
+        // console.log("useEffect called in SideNav")
+    },[spanpreferences.spanlevel])
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        props.setShowVisualization(false);
+        props.setShowVisualization(true);
+        setSpanPreferences(spanpreferences);
+      }
+
+      const onSpanChange = (e) => {
+        console.log("day span is changing...")
+        setSpanPreferences({
+            ...spanpreferences,
+            spanlevel: e.target.value
+        });
+      }
+
+   
+    console.log("visulization...", spanpreferences.spanlevel)
 
     return(<div>
+          <div className = {classes.svgContainer}>
+          <form onSubmit={{}} style={{marginLeft:'20px'}}>
+            Select Time Span :   
+            <select name="pricelevel" id="pricelevel" onChange={onSpanChange} >
+                    <option value="365" selected ={spanpreferences.spanlevel === "365"} >Any</option>
+                    <option value="1" selected ={spanpreferences.spanlevel === "1"}> 1 Day</option>
+                    <option value="7" selected ={spanpreferences.spanlevel === "7"} > 7 Days</option>
+
+            </select>
+            {/* <button type="submit"   style={{marginLeft:'0px'}} >Filter</button> */}
+            </form>
+    
+         </div>
+
+            <br/><br/>
+
+
 
             <div className = {classes.svgContainer}>
             <strong style={{color:'black',marginLeft:'140px'}}>CategoryWise User Ratings Count</strong> 
-                <PieChartCategoryCount username={props.username} />
+                <PieChartCategoryCount username={props.username} visulizationfilter = {spanpreferences.spanlevel}/>
             </div>
             
             <br></br>
@@ -41,21 +85,21 @@ const Visualization =(props)=>{
             <div className = {classes.svgContainer}>
                 <strong style={{color:'black',marginLeft:'160px'}}>StarWise User Ratings Count</strong>
                 <br></br> 
-                <BarChartStartCount username={props.username}/>
+                <BarChartStartCount username={props.username} visulizationfilter = {spanpreferences.spanlevel}/>
             </div>
             <br></br>
             <div className = {classes.svgContainer}>
             <br></br>
                 <strong style={{color:'black',marginLeft:'130px'}}>PriceLevelWise User Ratings Count</strong> 
                 <br></br>
-                <BarChartPriceCount username={props.username}/>
+                <BarChartPriceCount username={props.username} visulizationfilter = {spanpreferences.spanlevel}/>
             </div>
             <br></br>
             <br></br>
             <div className = {classes.svgContainer}>
             <br></br>
             <strong style={{color:'black',marginLeft:'70px'}}>TopMost 3 Categories User Ratings &gt; 3 Stars</strong>
-                <PieChartFavCategoryCount username={props.username} />
+                <PieChartFavCategoryCount username={props.username} visulizationfilter = {spanpreferences.spanlevel}/>
             </div>
 
 

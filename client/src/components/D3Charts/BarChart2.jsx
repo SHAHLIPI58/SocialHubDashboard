@@ -22,6 +22,13 @@ function BarChart2 (props) {
         //     "TWITTER" : 1,
         //     "WEIBO"   : 1
         // };
+
+        
+        // Remove the old svg
+        d3.select(`#${props.chartId}`)
+        .select('svg')
+        .remove();
+        
         let data = props.data
         let margin = {top: 20, right: 30, bottom: 30, left: 40};
         let svgWidth = 590, svgHeight = 300;

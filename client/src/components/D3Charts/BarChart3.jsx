@@ -19,6 +19,12 @@ function BarChart3 (props) {
 
     const drawChart = () => {
 
+
+        // Remove the old svg
+        d3.select(`#${props.chartId}`)
+        .select('svg')
+        .remove();
+
         
         let data = props.data
 

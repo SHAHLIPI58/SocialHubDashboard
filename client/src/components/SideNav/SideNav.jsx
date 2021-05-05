@@ -226,7 +226,7 @@ return (
 
                 {/* Textbox for radius */}
             
-                <strong style={{color:'white'}}>Radius:</strong>
+                <strong style={{color:'white'}}>Radius(Miles):</strong>
                             <label>
                                 <input
                                     type="text"

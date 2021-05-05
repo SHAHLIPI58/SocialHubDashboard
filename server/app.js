@@ -195,9 +195,9 @@ app.post('/search',(req,res)=>{
   // console.log(radius);
   // console.log(categories);
   // console.log(price);
- const bearerToken2 = "helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx";
-  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
-  const bearerToken1="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
+ const bearerToken1 = "helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx";
+  const bearerToken2 = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  const bearerToken="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {
         Authorization: `Bearer ${bearerToken}` 
@@ -238,9 +238,9 @@ app.post('/search',(req,res)=>{
 app.post('/otherUsersReviews',(req,res)=>{
   let bussinessId = req.body.resId
   //console.log("bussinessId :otherUsersReviews",bussinessId)
-  const bearerToken2 ="helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx";  
-  const bearerToken = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
-  const bearerToken1="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
+  const bearerToken1 ="helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx";  
+  const bearerToken2 = "ITrF-x3KyQGhcwu_KJ1UuNel0z3TmiC3icaP-2511-fMzR0eSap1qllS4OsPheTsLWYkr_T70kY1aInoIKHRB4ehHF3I7dGasIP9ZkkAccLLxewzaEoaJwKakH6EYHYx";
+  const bearerToken="eK56-qSrTKEY9waNsUaskzk7kvBlEKGMLnC8LQNDm4OCnybU67TtOGFYV8vqRLK9ejcIbMqARBXfYhV9JpUeAbCq90w8WA6vafzj6i0IeoflC7bLDG3UzczPZ7VWYHYx";
   const config = {
     headers: {
         Authorization: `Bearer ${bearerToken}` 
@@ -297,7 +297,8 @@ app.post('/ratings',(req,res)=>{
      }
 
      var today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
-     //console.log(today)
+
+     //console.log("today .....",today)
      //console.log("mongodb body request testing...",username, itemid, itemname, rating, category, pricelevel)
 
       //insert function
@@ -443,6 +444,9 @@ app.post('/recombeeRecommendation',(req,res)=>{
 
 app.post('/getfindCountStartanalysisData',(req,res)=>{
   var username = req.body.username
+  var visulizationfilter = parseInt(req.body.visulizationfilter);
+
+  
   
 //   userratings = {
 //     ratingObject: []
@@ -469,7 +473,7 @@ var finalres ={}
         // Make the appropriate DB calls
 
         // Print the 10 cheapest suburbs in the Sydney, Australia market
-        await printCountByStart(client, username);
+        await printCountByStart(client, username,visulizationfilter);
 
     } finally {
         // Close the connection to the MongoDB cluster
@@ -486,13 +490,46 @@ main().catch(console.error);
  * @param {String} market The market you want to search
  * @param {number} maxNumberToPrint The maximum number of suburbs to print
  */
-async function printCountByStart(client, username) {
-    const pipeline = [
-      { '$match': { username: username} },
+async function printCountByStart(client, username,visulizationfilter) {
+  //var prevDate = new Date(("2021-05-25T00:00:00.000+00:00")) - (60*60*24*2*1000)
+  // console.log("Previous date.......",prevDate)
+ 
+  var today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
+
+  
+  var d = new Date()
+  d.setDate(d.getDate())
+  if(visulizationfilter === 1){
+    d.setDate(d.getDate()-2);
+  }else if(visulizationfilter === 7){
+    d.setDate(d.getDate()-8);
+  }else if(visulizationfilter === 365){
+    d.setDate(d.getDate()-365);
+  }
+  
+  var filter_span = moment(d).format('YYYY-MM-DD[T00:00:00.000Z]');
+  // console.log("week Ago...", new Date(filter_span))
+  // console.log("visulizationfilter ..",visulizationfilter)
+  
+
+  
+
+     const pipeline = [
+      { '$match': { username: username, "Date":{"$gt": (new Date(filter_span))}} },
       { '$group': { '_id': "$rating", 'count': { '$sum': 1 } } },
       { '$sort' :{_id:1}}
      
     ];
+
+  
+
+
+    // const pipeline = [
+    //   { '$match': { username: username} },
+    //   { '$group': { '_id': "$rating", 'count': { '$sum': 1 } } },
+    //   { '$sort' :{_id:1}}
+     
+    // ];
 
     // See https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#aggregate for the aggregate() docs
     const aggCursor = client.db("ratingMongo").collection("documents").aggregate(pipeline);
@@ -538,8 +575,9 @@ async function printCountByStart(client, username) {
 
 app.post('/getfindCountCategorySanalysisData',(req,res)=>{
    var username = req.body.username
+   var visulizationfilter = parseInt(req.body.visulizationfilter);
   // var uname = req.body.username
-   console.log("username in getfindCountCategorySanalysisData",req.body.data)
+  // console.log("username in getfindCountCategorySanalysisData",req.body.data)
    usercategoryratings = {
     categoryratingObject: []
 };
@@ -567,7 +605,7 @@ app.post('/getfindCountCategorySanalysisData',(req,res)=>{
         // Make the appropriate DB calls
 
         
-        await printCountByCategory(client, username);
+        await printCountByCategory(client, username,visulizationfilter);
 
     } finally {
         // Close the connection to the MongoDB cluster
@@ -583,9 +621,22 @@ main().catch(console.error);
  * @param {String} username 
 
  */
-async function printCountByCategory(client, username) {
+async function printCountByCategory(client, username,visulizationfilter) {
+
+  var d = new Date()
+  d.setDate(d.getDate())
+  if(visulizationfilter === 1){
+    d.setDate(d.getDate()-2);
+  }else if(visulizationfilter === 7){
+    d.setDate(d.getDate()-8);
+  }else if(visulizationfilter === 365){
+    d.setDate(d.getDate()-365);
+  }
+  
+  var filter_span = moment(d).format('YYYY-MM-DD[T00:00:00.000Z]');
+  
     const pipeline = [
-      { '$match': { username: username} },
+      { '$match': { username: username,"Date":{"$gt": (new Date(filter_span))}} },
       { '$group': { '_id': "$category", 'count': { '$sum': 1 } } }
     ];
 
@@ -618,6 +669,7 @@ async function printCountByCategory(client, username) {
 
 app.post('/getfindCountPriceanalysisData',(req,res)=>{
   var username = req.body.username
+  var visulizationfilter = parseInt(req.body.visulizationfilter);
 
  var finalres ={}
   async function main() {
@@ -632,7 +684,7 @@ app.post('/getfindCountPriceanalysisData',(req,res)=>{
         // Make the appropriate DB calls
 
         // Print the 10 cheapest suburbs in the Sydney, Australia market
-        await printCountByPrice(client, username);
+        await printCountByPrice(client, username,visulizationfilter);
 
     } finally {
         // Close the connection to the MongoDB cluster
@@ -647,9 +699,23 @@ main().catch(console.error);
  * @param {MongoClient} client A MongoClient that is connected to a cluster with the sample_airbnb database
  * @param {String} pricelevel
  */
-async function printCountByPrice(client, username) {
+async function printCountByPrice(client, username,visulizationfilter) {
+
+  var d = new Date()
+  d.setDate(d.getDate())
+  if(visulizationfilter === 1){
+    d.setDate(d.getDate()-2);
+  }else if(visulizationfilter === 7){
+    d.setDate(d.getDate()-8);
+  }else if(visulizationfilter === 365){
+    d.setDate(d.getDate()-365);
+  }
+  
+  var filter_span = moment(d).format('YYYY-MM-DD[T00:00:00.000Z]')
+
+   console.log("Filter _span in getfindCountPriceanalysisData",filter_span)
     const pipeline = [
-      { '$match': { username: username} },
+      { '$match': { username: username,"Date":{"$gt": (new Date(filter_span)) }} },
       { '$group': { '_id': "$pricelevel", 'count': { '$sum': 1 } } },
       { '$sort' :{_id:1}}
      
@@ -686,6 +752,7 @@ async function printCountByPrice(client, username) {
 
 app.post('/getfindCountFavCatanalysisData',(req,res)=>{
   var username = req.body.username
+  var visulizationfilter = parseInt(req.body.visulizationfilter);
   console.log("username in getfindCountCategorySanalysisData",req.body.data)
   usercategoryratingsfav = {
    categoryratingObjectfav: []
@@ -706,7 +773,7 @@ app.post('/getfindCountFavCatanalysisData',(req,res)=>{
        // Make the appropriate DB calls
 
        
-       await printCountByFavCategory(client, username);
+       await printCountByFavCategory(client, username,visulizationfilter);
 
    } finally {
        // Close the connection to the MongoDB cluster
@@ -722,9 +789,21 @@ main().catch(console.error);
 * @param {String} username 
 
 */
-async function printCountByFavCategory(client, username) {
+async function printCountByFavCategory(client, username,visulizationfilter) {
+
+  var d = new Date()
+  d.setDate(d.getDate())
+  if(visulizationfilter === 1){
+    d.setDate(d.getDate()-2);
+  }else if(visulizationfilter === 7){
+    d.setDate(d.getDate()-8);
+  }else if(visulizationfilter === 365){
+    d.setDate(d.getDate()-365);
+  }
+  
+  var filter_span = moment(d).format('YYYY-MM-DD[T00:00:00.000Z]')
    const pipeline = [
-     { '$match': { username: username,  rating:{$gt:3}} },
+     { '$match': { username: username,  rating:{$gt:3}, "Date":{"$gt": (new Date(filter_span)) }} },
      { '$group': { '_id': "$category", 'count': { '$sum': 1 } } },
      {'$limit' : 3},
      { '$sort' :{count:-1}}
