@@ -352,6 +352,8 @@ async function printCountByStart(client, username,visulizationfilter) {
         d.setDate(d.getDate()-1);
       }else if(visulizationfilter === 7){
         d.setDate(d.getDate()-7);
+      }else if(visulizationfilter === 30){
+        d.setDate(d.getDate()-30);
       }else if(visulizationfilter === 365){
         d.setDate(d.getDate()-365);
       }
@@ -410,6 +412,8 @@ async function printCountByCategory(client, username,visulizationfilter) {
       d.setDate(d.getDate()-1);
     }else if(visulizationfilter === 7){
       d.setDate(d.getDate()-7);
+    }else if(visulizationfilter === 30){
+      d.setDate(d.getDate()-30);
     }else if(visulizationfilter === 365){
       d.setDate(d.getDate()-365);
     }
@@ -465,6 +469,8 @@ app.post('/getfindCountPriceanalysisData',(req,res)=>{
           d.setDate(d.getDate()-1);
         }else if(visulizationfilter === 7){
           d.setDate(d.getDate()-7);
+        }else if(visulizationfilter === 30){
+          d.setDate(d.getDate()-30);
         }else if(visulizationfilter === 365){
           d.setDate(d.getDate()-365);
         }
@@ -523,6 +529,8 @@ app.post('/getfindCountFavCatanalysisData',(req,res)=>{
             d.setDate(d.getDate()-1);
           }else if(visulizationfilter === 7){
             d.setDate(d.getDate()-7);
+          }else if(visulizationfilter === 30){
+            d.setDate(d.getDate()-30);
           }else if(visulizationfilter === 365){
             d.setDate(d.getDate()-365);
           }

@@ -62,8 +62,10 @@ const Visualization =(props)=>{
             Select Time Span :   
             <select name="pricelevel" id="pricelevel" onChange={onSpanChange} >
                     <option value="365" selected ={spanpreferences.spanlevel === "365"} >1 Year</option>
+                    <option value="30" selected ={spanpreferences.spanlevel === "30"} > 1 Month</option>
+                    <option value="7" selected ={spanpreferences.spanlevel === "7"} > 1 Week</option>
                     <option value="1" selected ={spanpreferences.spanlevel === "1"}> 1 Day</option>
-                    <option value="7" selected ={spanpreferences.spanlevel === "7"} > 7 Days</option>
+                 
 
             </select>
             {/* <button type="submit"   style={{marginLeft:'0px'}} >Filter</button> */}
