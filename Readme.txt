@@ -1,4 +1,34 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Packages Used in Project
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+ReactJs Client:
+react
+axios
+d3
+css-loader
+google-map-react
+promise
+prop-types
+react-router
+react-router-dom
+react-spinners
+react-scroll
+@material-ui/core
+bootstrap
+react-bootstrap
+query-string
 
+NodeJs Server:
+axios
+body-parser
+moment
+mongodb
+mysql
+recombee-api-client
+cors
+express
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 In order to upload social places data using Yelp fusion APIs to Recombee item catalogue is already done by running python script which is inside /data folder.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,10 +100,10 @@ db.documents.find()
                                           API KEYS USED IN PROJECT
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Yelp fusion API Key = "helGUeqNlXHSd-EZ2XLiQrMpQ25vAm2TNhsiJ5K2cP9XXaAeOw_Q7NvhG1TWLRvggiFQQOqK_8twVcxOqpcxpzdPTYN6Lad9l9Gu1etR4u6FO6ke7gHN6CaISkmHYHYx"
+Yelp fusion API Key = "YELP_API"
 
-Recombee server side API key = "DEJsyJUwbrXVEePuRyEQmfAayorajE6ELWUSU3xIpr1rXuELPQfilPpkTytBANQA"
+Recombee server side API key = "RECOMBEE_BACKEND_API"
 
-Google Map API key = "AIzaSyBn8Nd-y2xT2QFtkh8INau53gcZbT64x_k"
+Google Map API key = "GOOGLE_MAP_API"
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
